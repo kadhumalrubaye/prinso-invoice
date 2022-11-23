@@ -18,6 +18,7 @@ class DeliveryAgencyFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'phone' => fake()->randomDigit(),
         ];
     }
 }

@@ -28,6 +28,8 @@ return new class extends Migration
             // $table->string('customer_name');
             // $table->string('delivery_agency');
             $table->double('delivery_price', 8, 3);
+            $table->text('note');
+            $table->double('total_price', 8, 3); // delivery + item_total  price
 
             // $table->double('price', 8, 3);
         });

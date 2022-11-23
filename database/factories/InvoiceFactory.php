@@ -31,6 +31,8 @@ class InvoiceFactory extends Factory
             'delivery_agency_id' => DeliveryAgency::all()->random()->id,
             'item_id' => Item::all()->random()->id,
             'delivery_price' => fake()->randomDigit(),
+            'total_price' => fake()->randomDigit(),
+            'note' => fake()->text(),
         ];
     }
 }
