@@ -1,4 +1,6 @@
-@foreach ($deliveries as $delivery)
+@extends('layouts.app')
+
+@foreach ($delivery as $delivery)
 
 
 

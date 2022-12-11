@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Customer;
+use App\Models\DeliveryAgency;
+use App\Models\Invoice;
+use App\Models\Item;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +21,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/invoice', function () {
+    return view('invoice', ['invoices' => Invoice::all()]);
+});
+Route::get('/item', function () {
+    return view('item', ['items' => Item::all()]);
+});
+Route::get('/customer', function () {
+    return view('customer', ['customers' => Customer::all()]);
+});
+Route::get('/delivery', function () {
+    return view('delivery', ['delivery' => DeliveryAgency::all()]);
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,8 +44,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -1,7 +1,5 @@
+@extends('layouts.app')
 @foreach ($items as $item)
-
-
-
 <div class="card" style="width: 18rem;">
 
     <ul class="list-group list-group-flush">

@@ -1,3 +1,4 @@
+@extends('layouts.app')
 @foreach ($invoices as $invoice)
 
 
