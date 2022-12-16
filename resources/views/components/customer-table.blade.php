@@ -1,5 +1,3 @@
-@extends('layouts.master')
-@section('content')
 <div class="container-fluid">
     <h3 class="text-dark mb-4">ادارة الزبائن</h3>
     <div class="card shadow">
@@ -111,4 +109,3 @@
         </div>
     </div>
 </div>
-@endsection
