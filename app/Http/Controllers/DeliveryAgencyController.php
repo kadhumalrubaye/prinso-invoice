@@ -47,7 +47,8 @@ class DeliveryAgencyController extends Controller
      */
     public function show(DeliveryAgency $deliveryAgency)
     {
-        //
+        $delivery = DeliveryAgency::all();
+        return view('delivery', ['delivery' => $delivery]);
     }
 
     /**

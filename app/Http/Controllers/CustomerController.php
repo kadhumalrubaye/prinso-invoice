@@ -15,7 +15,6 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -47,7 +46,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('customer', ['customers' => Customer::all()]);
     }
 
     /**

@@ -2,6 +2,7 @@
 @section('content')
 <div class="container-fluid">
     <h3 class="text-dark mb-4">المنتجات</h3>
+    @include('components.add-new-entry')
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 fw-bold">ادارة المنتجات</p>
@@ -25,7 +26,6 @@
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>السعر النهائي</th>
                             <th>اسم المنتج</th>
                             <th>العدد</th>
                             <th>السعر الاصلي</th>
@@ -33,119 +33,30 @@
                             <th>سعر البيع</th>
                             <th>مجموع سعر البيع</th>
                             <th>نسبة التخفيض</th>
+                            <th>السعر النهائي</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($items as $item)
                         <tr>
-                            <td>1</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
+                            <td>{{$item->id}}</td>
+                            <td>{{$item->name}}</td>
+                            <td>{{$item->quantity}}</td>
+                            <td>{{$item->original_price}}</td>
+                            <td>{{$item->original_totla_price}}</td>
+                            <td>{{$item->price}}</td>
+                            <td>{{$item->total_price}}</td>
+                            <td>{{$item->discount}}%</td>
+                            <td>د.ع {{$item->discount+$item->discount+$item->original_price}}</td>
+                            <!-- <td>33</td>
                             <td>2008/11/28</td>
                             <td>$162,700</td>
                             <td>Cell 7</td>
                             <td>Cell 8</td>
-                            <td>Cell 9</td>
+                            <td>Cell 9</td> -->
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Chief Executive Officer(CEO)</td>
-                            <td>London</td>
-                            <td>47</td>
-                            <td>2009/10/09<br></td>
-                            <td>$1,200,000</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td>Cell 9</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009/01/12<br></td>
-                            <td>$86,000</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td>Cell 9</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Software Engineer</td>
-                            <td>London</td>
-                            <td>41</td>
-                            <td>2012/10/13<br></td>
-                            <td>$132,000</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td>Cell 9</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Software Engineer</td>
-                            <td>San Francisco</td>
-                            <td>28</td>
-                            <td>2011/06/07<br></td>
-                            <td>$206,850</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td>Cell 9</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Integration Specialist</td>
-                            <td>New York</td>
-                            <td>61</td>
-                            <td>2012/12/02<br></td>
-                            <td>$372,000</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td>Cell 9</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>Software Engineer</td>
-                            <td>London</td>
-                            <td>38</td>
-                            <td>2011/05/03<br></td>
-                            <td>$163,500</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td>Cell 9</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>Pre-Sales Support</td>
-                            <td>New York</td>
-                            <td>21</td>
-                            <td>2011/12/12<br></td>
-                            <td>$106,450</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td>Cell 9</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>Sales Assistant</td>
-                            <td>New York</td>
-                            <td>46</td>
-                            <td>2011/12/06<br></td>
-                            <td>$145,600</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td>Cell 9</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>Senior JavaScript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29<br></td>
-                            <td>$433,060</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td>Cell 9</td>
-                        </tr>
+                        @endforeach
+
                     </tbody>
                     <tfoot>
                         <tr>

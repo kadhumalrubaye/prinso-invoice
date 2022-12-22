@@ -2,6 +2,7 @@
 @section('content')
 <div class="container-fluid">
     <h3 class="text-dark mb-4">ادارة الزبائن</h3>
+    @include('components.add-new-entry')
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 fw-bold">معلومات الزبائن</p>
@@ -24,62 +25,21 @@
                 <table class="table table-hover my-0" id="dataTable">
                     <thead>
                         <tr>
-                            <th>الاسم</th>
                             <th>العنوان</th>
                             <th>رقم الهاتف</th>
+                            <th>الاسم</th>
                         </tr>
                     </thead>
                     <tbody>
+
+                        @foreach ( $customers as $customer )
                         <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">سارة عدنان جمال</td>
-                            <td>ديالى - بعقوبة</td>
-                            <td>07739521500</td>
+                            <td>{{$customer->address}}</td>
+                            <td>{{$customer->phone}}</td>
+                            <td>{{$customer->name}}</td>
                         </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">سمية ناصر علي</td>
-                            <td>بغداد - اليرموك</td>
-                            <td><br>07739521456<br><br></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar3.jpeg">مهند فالح قاسم</td>
-                            <td>البصرة- الزبير</td>
-                            <td>07739521545<br></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar4.jpeg">شيرين جاسم عمر</td>
-                            <td>اربيل - عينكاوة</td>
-                            <td>07739521500<br></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar5.jpeg">جلب الجلب</td>
-                            <td>بغداد- الصليخ</td>
-                            <td>07739521578<br></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">نورة حميد غازي</td>
-                            <td>بغداد - المنصور</td>
-                            <td>07739521987<br></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">زهراء داوود حسين<br></td>
-                            <td>بغداد - الوزيرية</td>
-                            <td>07739521572<br></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar3.jpeg">محمود علي حسن</td>
-                            <td>ديالى - شهربان</td>
-                            <td>07739521576<br></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar4.jpeg">نرجس مراد علي</td>
-                            <td>اربيل - شارع ستين</td>
-                            <td>07739524568<br></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar5.jpeg">جلب الجلب</td>
-                            <td>ديالى - خانقين</td>
-                            <td>07739529883<br></td>
-                        </tr>
+                        @endforeach
+
                     </tbody>
                     <tfoot>
                         <tr>

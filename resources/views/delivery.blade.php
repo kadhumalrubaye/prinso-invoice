@@ -2,6 +2,7 @@
 @section('content')
 <div class="container-fluid">
     <h3 class="text-dark mb-4">ادارة التوصيل</h3>
+    @include('components.add-new-entry')
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 fw-bold">معلومات جهات التوصيل</p>
@@ -24,53 +25,22 @@
                 <table class="table my-0" id="dataTable">
                     <thead>
                         <tr>
-                            <th>جهة التوصيل</th>
                             <th>رقم الهاتف</th>
+                            <th>جهة التوصيل</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ( $delivery as $deliveryEntry)
+
                         <tr>
-                            <td>Tokyo</td>
-                            <td>33</td>
+                            <td>{{$deliveryEntry->phone}}</td>
+                            <td>{{$deliveryEntry->name}}</td>
                         </tr>
-                        <tr>
-                            <td>London</td>
-                            <td>47</td>
-                        </tr>
-                        <tr>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                        </tr>
-                        <tr>
-                            <td>London</td>
-                            <td>41</td>
-                        </tr>
-                        <tr>
-                            <td>San Francisco</td>
-                            <td>28</td>
-                        </tr>
-                        <tr>
-                            <td>New York</td>
-                            <td>61</td>
-                        </tr>
-                        <tr>
-                            <td>London</td>
-                            <td>38</td>
-                        </tr>
-                        <tr>
-                            <td>New York</td>
-                            <td>21</td>
-                        </tr>
-                        <tr>
-                            <td>New York</td>
-                            <td>46</td>
-                        </tr>
-                        <tr>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                        </tr>
+                        @endforeach
+
                     </tbody>
                     <tfoot>
+
                         <tr>
                             <td><strong>جهة التوصيل</strong></td>
                             <td><strong>رقم الهاتف</strong></td>
@@ -100,3 +70,6 @@
     </div>
 </div>
 @endsection
+
+l>
+</div>

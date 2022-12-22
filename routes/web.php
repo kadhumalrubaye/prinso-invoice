@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DeliveryAgencyController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Customer;
 use App\Models\DeliveryAgency;
@@ -21,22 +25,28 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/invoice', function () {
-    return view('invoice', ['invoices' => Invoice::all()]);
+
+Route::get('/customers', [CustomerController::class, 'show'])->name('customers');
+Route::get('/invoices', [InvoiceController::class, 'show'])->name('invoices');
+Route::get('/delivery', [DeliveryAgencyController::class, 'show'])->name('delivery');
+Route::get('/items', [ItemController::class, 'show'])->name('items');
+
+
+
+// Route::get('/delivery', function () {
+
+Route::get('/login', function () {
+    return view('auth.login');
 });
-Route::get('/item', function () {
-    return view('item', ['items' => Item::all()]);
-});
-Route::get('/customer', function () {
-    return view('customer', ['customers' => Customer::all()]);
-});
-Route::get('/delivery', function () {
-    return view('delivery', ['delivery' => DeliveryAgency::all()]);
+Route::get('/register', function () {
+    return view('auth.register');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+//     return view('delivery', ['delivery' => DeliveryAgency::all()]);
+// });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

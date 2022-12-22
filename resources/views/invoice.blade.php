@@ -2,6 +2,7 @@
 @section('content')
 <div class="container-fluid">
     <h3 class="text-dark mb-4">ادارة الفواتير</h3>
+    @include('components.add-new-entry')
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 fw-bold">Employee Info</p>
@@ -36,129 +37,40 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($invoices as $invoice)
                         <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Airi Satou</td>
-                            <td>Accountant</td>
-                            <td>بغداد - السيدية</td>
-                            <td>شركة البسيط</td>
-                            <td>تم</td>
-                            <td>$162,700</td>
+
+                            <td>{{$invoice->customer_id}}</td>
+                            <td>{{$invoice->item_id}}</td>
+                            <td>{{$invoice->address}}</td>
+                            <td> {{$invoice->delivery_id}}</td>
+                            <td>{{$invoice->payment_status}}</td>
+                            <td>{{$invoice->delivery_price}}</td>
+                            <td>{{$invoice->total_price}}</td>
+                            <td>{{$invoice->note}}</td>
+                            <td>{{$invoice->id}}</td>
+                            <td>{{$invoice->timestamp}}</td>
+                            <!-- <td>$162,700</td>
+
                             <td>Cell 7</td>
-                            <td>Cell 8</td>
+                            <td>Cell 8</td> -->
                             <td><i class="fas fa-print" style="color: var(--bs-red);font-size: 36px;"></i></td>
                         </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Angelica Ramos</td>
-                            <td>Chief Executive Officer(CEO)</td>
-                            <td>ديالى - حمرين</td>
-                            <td>شركة البسيط</td>
-                            <td>انتظار<br></td>
-                            <td>$1,200,000</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td><i class="fas fa-print" style="color: var(--bs-red);font-size: 36px;"></i></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar3.jpeg">Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>العمارة - الحمزة</td>
-                            <td>محمد</td>
-                            <td>الغاء<br></td>
-                            <td>$86,000</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td><i class="fas fa-print" style="color: var(--bs-red);font-size: 36px;"></i></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar4.jpeg">Bradley Greer</td>
-                            <td>Software Engineer</td>
-                            <td>بغداد - اليرموك</td>
-                            <td>شركة البسيط</td>
-                            <td>انتظار<br></td>
-                            <td>$132,000</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td><i class="fas fa-print" style="color: var(--bs-red);font-size: 36px;"></i></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar5.jpeg">Brenden Wagner</td>
-                            <td>Software Engineer</td>
-                            <td>بغداد - البلديات</td>
-                            <td>شركة البسيط</td>
-                            <td>تم<br></td>
-                            <td>$206,850</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td><i class="fas fa-print" style="color: var(--bs-red);font-size: 36px;"></i></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Brielle Williamson</td>
-                            <td>Integration Specialist</td>
-                            <td>بغداد - الحسينية</td>
-                            <td>محمد</td>
-                            <td>تم<br></td>
-                            <td>$372,000</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td><i class="fas fa-print" style="color: var(--bs-red);font-size: 36px;"></i></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Bruno Nash<br></td>
-                            <td>Software Engineer</td>
-                            <td>ديالى - شهربان</td>
-                            <td>محمد</td>
-                            <td>تم<br></td>
-                            <td>$163,500</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td><i class="fas fa-print" style="color: var(--bs-red);font-size: 36px;"></i></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar3.jpeg">Caesar Vance</td>
-                            <td>Pre-Sales Support</td>
-                            <td>ديالى - خانقين</td>
-                            <td>شركة البسيط</td>
-                            <td>الغاء<br></td>
-                            <td>$106,450</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td><i class="fas fa-print" style="color: var(--bs-red);font-size: 36px;"></i></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar4.jpeg">Cara Stevens</td>
-                            <td>Sales Assistant</td>
-                            <td>ديالى - بلدروز</td>
-                            <td>شركة البسيط</td>
-                            <td>انتظار<br></td>
-                            <td>$145,600</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td><i class="fas fa-print" style="color: var(--bs-red);font-size: 36px;"></i></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar5.jpeg">Cedric Kelly</td>
-                            <td>Senior JavaScript Developer</td>
-                            <td>ديالى - خالص</td>
-                            <td>محمد</td>
-                            <td>الغاء<br></td>
-                            <td>$433,060</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td><i class="fas fa-print" style="color: var(--bs-red);font-size: 36px;"></i></td>
-                        </tr>
+                        @endforeach
+
+
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td><strong>Name</strong></td>
-                            <td><strong>Position</strong></td>
-                            <td><strong>العنوان</strong></td>
-                            <td><strong>جهة التوصيل</strong></td>
-                            <td><strong>حالة الدفع</strong></td>
-                            <td><strong>Salary</strong></td>
-                            <td>Summary 7</td>
-                            <td>Summary 8</td>
-                            <td>Summary 9</td>
+                            <th>الزبون</th>
+                            <th>المنتج</th>
+                            <th>العنوان</th>
+                            <th>جهة التوصيل</th>
+                            <th>حالة الدفع</th>
+                            <th>سعر التوصيل</th>
+                            <th>السعر الكلي</th>
+                            <th>الملاحظات</th>
+                            <th>طباعة</th>
                         </tr>
                     </tfoot>
                 </table>
