@@ -15,7 +15,7 @@ class DeliveryAgencyController extends Controller
      */
     public function index()
     {
-        //
+        return view('delivery', ['deliveries' => DeliveryAgency::all()]);
     }
 
     /**
@@ -25,7 +25,7 @@ class DeliveryAgencyController extends Controller
      */
     public function create()
     {
-        //
+        return view('components.delivery.create-delivery');
     }
 
     /**
@@ -36,7 +36,16 @@ class DeliveryAgencyController extends Controller
      */
     public function store(StoreDeliveryAgencyRequest $request)
     {
-        //
+        DeliveryAgency::create(
+            [
+                'name' => $request->name,
+                'phone' => $request->phone,
+
+            ]
+
+        );
+
+        return view('delivery', ['deliveries' => DeliveryAgency::all()]);
     }
 
     /**

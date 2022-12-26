@@ -2,7 +2,9 @@
 @section('content')
 <div class="container-fluid">
     <h3 class="text-dark mb-4">ادارة التوصيل</h3>
-    @include('components.add-new-entry')
+
+    <a class="btn btn-primary p-3   m-3" href="{{route('deliveries.create')}}">اضافة</a>
+
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 fw-bold">معلومات جهات التوصيل</p>
@@ -27,14 +29,19 @@
                         <tr>
                             <th>رقم الهاتف</th>
                             <th>جهة التوصيل</th>
+                            <th>العمليات </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ( $delivery as $deliveryEntry)
+                        @foreach ( $deliveries as $deliveryEntry)
 
                         <tr>
                             <td>{{$deliveryEntry->phone}}</td>
                             <td>{{$deliveryEntry->name}}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{{route('deliveries.destroy',$deliveryEntry->id)}}"> مسح </a>
+                                <a href="{{route('deliveries.edit',$deliveryEntry)}}" class="btn btn-primary">تعديل</a>
+                            </td>
                         </tr>
                         @endforeach
 
@@ -44,8 +51,10 @@
                         <tr>
                             <td><strong>جهة التوصيل</strong></td>
                             <td><strong>رقم الهاتف</strong></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                العمليات
+                            </td>
+
                         </tr>
                     </tfoot>
                 </table>

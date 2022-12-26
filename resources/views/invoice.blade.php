@@ -2,10 +2,17 @@
 @section('content')
 <div class="container-fluid">
     <h3 class="text-dark mb-4">ادارة الفواتير</h3>
-    @include('components.add-new-entry')
+
+
+
+
+
+    <a class="btn btn-primary p-3   m-3" href="{{url('/invoices/create')}}">اضافة</a>
+
+
     <div class="card shadow">
         <div class="card-header py-3">
-            <p class="text-primary m-0 fw-bold">Employee Info</p>
+            <p class="text-primary m-0 fw-bold">معلومات الفواتير</p>
         </div>
         <div class="card-body">
             <div class="row">
@@ -33,12 +40,13 @@
                             <th>سعر التوصيل</th>
                             <th>السعر الكلي</th>
                             <th>الملاحظات</th>
-                            <th>طباعة</th>
+                            <th>العمليات</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($invoices as $invoice)
                         <tr>
+
 
                             <td>{{$invoice->customer_id}}</td>
                             <td>{{$invoice->item_id}}</td>
@@ -47,9 +55,18 @@
                             <td>{{$invoice->payment_status}}</td>
                             <td>{{$invoice->delivery_price}}</td>
                             <td>{{$invoice->total_price}}</td>
-                            <td>{{$invoice->note}}</td>
+                            <td>{{
+                                Str::limit(  $invoice->note, 20, ' (المزيد ...)')
+                              
+                            }}</td>
                             <td>{{$invoice->id}}</td>
-                            <td>{{$invoice->timestamp}}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{{route('customers.destroy',$invoice->id)}}"> مسح </a>
+                                <a class="btn btn-primary">تعديل</a>
+                                <a class="btn btn-primary">طباعة</a>
+
+
+                            </td>
                             <!-- <td>$162,700</td>
 
                             <td>Cell 7</td>

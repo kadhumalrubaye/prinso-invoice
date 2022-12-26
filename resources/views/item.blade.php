@@ -2,7 +2,11 @@
 @section('content')
 <div class="container-fluid">
     <h3 class="text-dark mb-4">المنتجات</h3>
-    @include('components.add-new-entry')
+
+
+    <a class="btn btn-primary p-3   m-3" href="{{url('/items/create')}}">اضافة</a>
+
+
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 fw-bold">ادارة المنتجات</p>
@@ -34,6 +38,7 @@
                             <th>مجموع سعر البيع</th>
                             <th>نسبة التخفيض</th>
                             <th>السعر النهائي</th>
+                            <th>العمليات</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,6 +53,10 @@
                             <td>{{$item->total_price}}</td>
                             <td>{{$item->discount}}%</td>
                             <td>د.ع {{$item->discount+$item->discount+$item->original_price}}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{{route('items.destroy',$item->id)}}"> مسح </a>
+                                <a href="{{route('items.edit',$item)}}" class="btn btn-primary">تعديل</a>
+                            </td>
                             <!-- <td>33</td>
                             <td>2008/11/28</td>
                             <td>$162,700</td>
@@ -93,4 +102,13 @@
         </div>
     </div>
 </div>
+
+<!-- <form method="POST" action="/submit">
+    @csrf
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br>
+    <input type="submit" value="Submit">
+</form> -->
 @endsection

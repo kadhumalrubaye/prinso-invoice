@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 
+
 class CustomerController extends Controller
 {
     /**
@@ -15,6 +16,11 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        return view('customer', ['customers' => Customer::all()]);
+        //$customers = Customer::paginate(10);
+        //$view_data['customers'] = $customers;
+        //return view('customer')->with($view_data);
+        // return view('customer', ['customers' => Customer::all()]);
     }
 
     /**
@@ -24,7 +30,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('components.customer.create-customer');
     }
 
     /**
@@ -35,7 +42,16 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
-        //
+        Customer::create(
+            [
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]
+
+        );
+
+        return view('customer', ['customers' => Customer::all()]);
     }
 
     /**
@@ -46,7 +62,6 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view('customer', ['customers' => Customer::all()]);
     }
 
     /**
@@ -57,7 +72,8 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+
+        return view('components.customer.edit-customer', compact('customer'));
     }
 
     /**
@@ -69,7 +85,15 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+        ]);
+
+        $customer->update($request->all());
+
+        return redirect()->route('customers.index');
     }
 
     /**

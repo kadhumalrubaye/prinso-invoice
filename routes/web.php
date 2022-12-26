@@ -1,15 +1,13 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliveryAgencyController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\ProfileController;
-use App\Models\Customer;
-use App\Models\DeliveryAgency;
-use App\Models\Invoice;
-use App\Models\Item;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,30 +21,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
-Route::get('/customers', [CustomerController::class, 'show'])->name('customers');
-Route::get('/invoices', [InvoiceController::class, 'show'])->name('invoices');
-Route::get('/delivery', [DeliveryAgencyController::class, 'show'])->name('delivery');
-Route::get('/items', [ItemController::class, 'show'])->name('items');
 
+Route::resource('customers', CustomerController::class);
 
+//customers.show
 
-// Route::get('/delivery', function () {
-
-Route::get('/login', function () {
-    return view('auth.login');
-});
-Route::get('/register', function () {
-    return view('auth.register');
-});
+Route::resource('items', ItemController::class);
+Route::resource('invoices', InvoiceController::class);
+Route::resource('deliveries', DeliveryAgencyController::class);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-//     return view('delivery', ['delivery' => DeliveryAgency::all()]);
-// });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -54,12 +48,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 require __DIR__ . '/auth.php';
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

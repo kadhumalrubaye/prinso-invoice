@@ -15,7 +15,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::all();
+
+        return view('item', ['items' => $items]);
     }
 
     /**
@@ -25,7 +27,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('components.items.add-item');
     }
 
     /**
@@ -36,7 +38,21 @@ class ItemController extends Controller
      */
     public function store(StoreItemRequest $request)
     {
-        //
+        Item::create(
+            [
+                'name' => $request->name,
+                'item_num' => $request->item_num,
+                'quantity' => $request->quantity,
+                'price' => $request->price,
+                'total_price' => $request->total_price,
+                'original_price' => $request->original_price,
+                'original_totla_price' => $request->original_totla_price,
+                'discount' => $request->discount,
+            ]
+
+        );
+
+        return view('item', ['items' => Item::all()]);
     }
 
     /**

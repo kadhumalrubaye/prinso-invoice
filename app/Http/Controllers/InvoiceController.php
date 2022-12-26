@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
@@ -15,7 +16,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Invoice::all();
+        return view('invoice', ['invoices' => $invoices]);
     }
 
     /**
@@ -25,7 +27,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('components.invoice.create-invoice');
     }
 
     /**
@@ -36,7 +38,18 @@ class InvoiceController extends Controller
      */
     public function store(StoreInvoiceRequest $request)
     {
-        //
+        Invoice::create(
+            [
+                'location' => $request->location,
+                'delivery_price' => $request->delivery_price,
+                'total_price' => $request->total_price,
+                'note' => $request->note,
+            ]
+
+        );
+        $x = DB::table('invoices')->latest()->paginate(10);
+
+        return view('invoice', ['invoices' => $x]);
     }
 
     /**

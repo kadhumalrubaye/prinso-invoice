@@ -2,7 +2,9 @@
 @section('content')
 <div class="container-fluid">
     <h3 class="text-dark mb-4">ادارة الزبائن</h3>
-    @include('components.add-new-entry')
+
+    <a class="btn btn-primary p-3   m-3" href="{{route('customers.create')}}">اضافة</a>
+
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 fw-bold">معلومات الزبائن</p>
@@ -28,6 +30,8 @@
                             <th>العنوان</th>
                             <th>رقم الهاتف</th>
                             <th>الاسم</th>
+                            <th>العمليات</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +41,12 @@
                             <td>{{$customer->address}}</td>
                             <td>{{$customer->phone}}</td>
                             <td>{{$customer->name}}</td>
+
+                            <td>
+                                <a class="btn btn-primary" href="{{route('customers.destroy',$customer->id)}}"> مسح </a>
+                                <a href="{{route('customers.edit',$customer)}}" class="btn btn-primary">تعديل</a>
+                            </td>
+
                         </tr>
                         @endforeach
 
@@ -46,8 +56,8 @@
                             <td><strong>الاسم</strong></td>
                             <td><strong>العنوان</strong></td>
                             <td><strong>رقم الهاتف</strong></td>
-                            <td></td>
-                            <td></td>
+                            <td><strong> العمليات</strong></td>
+
                         </tr>
                     </tfoot>
                 </table>
