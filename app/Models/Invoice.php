@@ -13,6 +13,9 @@ class Invoice extends Model
         'payment_status',
         'delivery_price',
         'total_price',
-        'note'
+        'note',
+        'customer_id',
+        'item_id',
+        'delivery_agency_id',
     ];
 }

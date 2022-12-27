@@ -30,9 +30,40 @@
             <input type="text" name="note" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
             <small id="emailHelp" class="form-text text-muted"></small>
         </div>
+        <div class="form-group">
+            <label for="category" class="form-label">المنتجات</label>
+            <select class="form-control" name="item_id" id="item_id">
+                <option hidden>اختر المنتج</option>
+                @foreach ($items as $item)
+                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="category" class="form-label">جهة التوصيل</label>
+            <select class="form-control" name="delivery_agency_id" id="delivery_agency_id">
+                <option hidden>اختر جهة التوصيل</option>
+                @foreach ($deliveries as $delivery)
+                <option value="{{ $delivery->id }}">{{ $delivery->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="category" class="form-label">اختر الزبون </label>
+            <select class="form-control" name="customer_id" id="customer_id">
+                <option hidden>اختر الزبون </option>
+                @foreach ($customers as $customer)
+                <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                @endforeach
+            </select>
+        </div>
 
 
         <button type="submit" class="btn btn-primary">اضافة</button>
     </form>
 </div>
+
+
+
+
 @endsection

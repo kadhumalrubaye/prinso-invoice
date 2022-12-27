@@ -15,7 +15,12 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/css/bootstrap.min.css',
+    @vite(['resources/css/app.css',
+    'resources/js/app.js','resources/js/theme.js',
+    'resources/js/bs-init.js',
+    'resources/js/chart.min.js',
+    'resources/js/bootstrap.min.js'])
 
 </head>
 
@@ -83,5 +88,6 @@
 
     </div>
 </body>
+
 
 </html>

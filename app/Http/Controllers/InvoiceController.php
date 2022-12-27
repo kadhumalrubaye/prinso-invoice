@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
+use App\Models\Customer;
+use App\Models\DeliveryAgency;
+use App\Models\Item;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
@@ -27,7 +30,14 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        return view('components.invoice.create-invoice');
+        $items = Item::all();
+        $deliveries = DeliveryAgency::all();
+        $customers = Customer::all();
+        return view('components.invoice.create-invoice', [
+            'items' => $items,
+            'deliveries' => $deliveries,
+            'customers' => $customers
+        ]);
     }
 
     /**
@@ -43,6 +53,9 @@ class InvoiceController extends Controller
                 'location' => $request->location,
                 'delivery_price' => $request->delivery_price,
                 'total_price' => $request->total_price,
+                'customer_id' => $request->customer_id,
+                'item_id' => $request->item_id,
+                'delivery_agency_id' => $request->delivery_agency_id,
                 'note' => $request->note,
             ]
 

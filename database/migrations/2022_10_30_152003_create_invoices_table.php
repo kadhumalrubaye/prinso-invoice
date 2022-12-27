@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('location');
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('customer_id')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('item_id')->nullable();
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
-            $table->unsignedBigInteger('delivery_agency_id');
+            $table->unsignedBigInteger('delivery_agency_id')->nullable();
             $table->foreign('delivery_agency_id')->references('id')->on('delivery_agency')->onDelete('cascade');
             // $table->bigInteger('destination_phone');
             $table->enum('payment_status', ['pending', 'done', 'canceled']);

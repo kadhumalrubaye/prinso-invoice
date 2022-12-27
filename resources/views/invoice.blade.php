@@ -50,8 +50,10 @@
 
                             <td>{{$invoice->customer_id}}</td>
                             <td>{{$invoice->item_id}}</td>
-                            <td>{{$invoice->address}}</td>
-                            <td> {{$invoice->delivery_id}}</td>
+                            <td>
+                                {{ Str::limit( $invoice->location, 10, ' (المزيد ...)')}}
+                            </td>
+                            <td> {{$invoice->delivery_agency_id}}</td>
                             <td>{{$invoice->payment_status}}</td>
                             <td>{{$invoice->delivery_price}}</td>
                             <td>{{$invoice->total_price}}</td>
@@ -59,10 +61,10 @@
                                 Str::limit(  $invoice->note, 20, ' (المزيد ...)')
                               
                             }}</td>
-                            <td>{{$invoice->id}}</td>
+
                             <td>
-                                <a class="btn btn-primary" href="{{route('customers.destroy',$invoice->id)}}"> مسح </a>
-                                <a class="btn btn-primary">تعديل</a>
+                                <!-- <a class="btn btn-primary" href="{{route('customers.destroy',$invoice->id)}}"> مسح </a> -->
+
                                 <a class="btn btn-primary">طباعة</a>
 
 
