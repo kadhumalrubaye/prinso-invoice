@@ -24,12 +24,12 @@ return new class extends Migration
             $table->unsignedBigInteger('delivery_agency_id')->nullable();
             $table->foreign('delivery_agency_id')->references('id')->on('delivery_agency')->onDelete('cascade');
             // $table->bigInteger('destination_phone');
-            $table->enum('payment_status', ['pending', 'done', 'canceled']);
+            $table->enum('payment_status', ['yes', 'no']);
             // $table->string('customer_name');
             // $table->string('delivery_agency');
-            $table->double('delivery_price', 8, 3);
+            $table->double('delivery_price');
             $table->text('note');
-            $table->double('total_price', 8, 3); // delivery + item_total  price
+            $table->double('total_price'); // delivery + item_total  price
 
             // $table->double('price', 8, 3);
         });

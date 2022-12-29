@@ -38,16 +38,25 @@ class ItemController extends Controller
      */
     public function store(StoreItemRequest $request)
     {
+        $total_price = $request->price * $request->quantity;
+        $original_totla_price = $request->original_price * $request->quantity;
+        $discount = $request->discount / 100;
+        $final_price = ($total_price + $original_totla_price) * $discount;
+
         Item::create(
             [
                 'name' => $request->name,
                 'item_num' => $request->item_num,
                 'quantity' => $request->quantity,
                 'price' => $request->price,
-                'total_price' => $request->total_price,
+
+                // 'total_price' => $request->total_price,
+                'total_price' => $total_price,
                 'original_price' => $request->original_price,
-                'original_totla_price' => $request->original_totla_price,
+                // 'original_totla_price' => $request->original_totla_price,
+                'original_totla_price' => $original_totla_price,
                 'discount' => $request->discount,
+
             ]
 
         );

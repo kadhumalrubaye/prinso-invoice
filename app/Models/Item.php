@@ -17,6 +17,7 @@ class Item extends Model
         'total_price',
         'original_price',
         'original_totla_price',
+
         'discount',
 
     ];

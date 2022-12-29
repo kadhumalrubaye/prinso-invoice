@@ -5,9 +5,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliveryAgencyController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ItemController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\ReportAController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,28 +20,11 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return view('welcome');
 });
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::resource('customers', CustomerController::class);
-
-//customers.show
-
-Route::resource('items', ItemController::class);
-Route::resource('invoices', InvoiceController::class);
-Route::resource('deliveries', DeliveryAgencyController::class);
-
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -51,5 +33,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('customers', CustomerController::class);
+
+//customers.show
+
+Route::resource('items', ItemController::class);
+Route::resource('invoices', InvoiceController::class);
+Route::resource('deliveries', DeliveryAgencyController::class);
+Route::resource('reporta', ReportAController::class);
 
 require __DIR__ . '/auth.php';

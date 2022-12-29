@@ -32,6 +32,7 @@
                 <table class="table my-0" id="dataTable">
                     <thead>
                         <tr>
+                            <th>رقم الفاتورة</th>
                             <th>الزبون</th>
                             <th>المنتج</th>
                             <th>العنوان</th>
@@ -40,6 +41,7 @@
                             <th>سعر التوصيل</th>
                             <th>السعر الكلي</th>
                             <th>الملاحظات</th>
+                            <th>تاريخ الانشاء</th>
                             <th>العمليات</th>
                         </tr>
                     </thead>
@@ -48,22 +50,25 @@
                         <tr>
 
 
-                            <td>{{$invoice->customer_id}}</td>
-                            <td>{{$invoice->item_id}}</td>
-                            <td>
-                                {{ Str::limit( $invoice->location, 10, ' (المزيد ...)')}}
-                            </td>
-                            <td> {{$invoice->delivery_agency_id}}</td>
+                            <td>{{$invoice->invoice_id }}</td>
+                            <td>{{$invoice->customer_name}}</td>
+                            <td>{{$invoice->item_name}}</td>
+                            <td>{{$invoice->invoice_address}}</td>
+
+                            <td> {{$invoice->delivery_name}}</td>
                             <td>{{$invoice->payment_status}}</td>
                             <td>{{$invoice->delivery_price}}</td>
                             <td>{{$invoice->total_price}}</td>
                             <td>{{
                                 Str::limit(  $invoice->note, 20, ' (المزيد ...)')
-                              
-                            }}</td>
+                                
+                            }}
+                            </td>
+                            <td>
+                                {{$invoice->created_at}}
+                            </td>
 
                             <td>
-                                <!-- <a class="btn btn-primary" href="{{route('customers.destroy',$invoice->id)}}"> مسح </a> -->
 
                                 <a class="btn btn-primary">طباعة</a>
 
@@ -81,7 +86,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>الزبون</th>
+                            <!-- <th>الزبون</th>
                             <th>المنتج</th>
                             <th>العنوان</th>
                             <th>جهة التوصيل</th>
@@ -89,7 +94,7 @@
                             <th>سعر التوصيل</th>
                             <th>السعر الكلي</th>
                             <th>الملاحظات</th>
-                            <th>طباعة</th>
+                            <th>طباعة</th> -->
                         </tr>
                     </tfoot>
                 </table>

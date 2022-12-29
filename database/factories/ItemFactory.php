@@ -19,14 +19,15 @@ class ItemFactory extends Factory
         return [
             'price' => fake()->randomDigit(),
             'name' => fake()->name(),
-            'item_num' => fake()->randomDigit(),
-            'quantity' => fake()->randomDigit(),
-            'price' => fake()->randomDigit(),
+            'item_num' => fake()->randomDigit(10),
+            'quantity' => fake()->randomDigit(10),
+            'price' => fake()->randomDigit(10),
             // 'single_price' => fake()->randomDigit(),
-            'total_price' => fake()->randomDigit(),
-            'original_price' => fake()->randomDigit(),
-            'original_totla_price' => fake()->randomDigit(),
-            'discount' => fake()->randomDigit(),
+            'total_price' => fake()->randomDigit(10),
+            'original_price' => fake()->randomDigit(10),
+            'original_totla_price' => fake()->randomDigit(10),
+            'discount' => fake()->randomDigit(10),
+
         ];
     }
 }

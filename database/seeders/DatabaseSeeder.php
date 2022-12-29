@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\DeliveryAgency;
 use App\Models\Invoice;
+use App\Models\ReportA;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DeliveryAgencySeeder::class);
         $this->call(CustomerSeeder::class);
         $this->call(InvoiceSeeder::class);
+        $this->call(ReportASeeder::class);
 
 
         // \App\Models\User::factory()->create([

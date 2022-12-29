@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @section('content')
 <div class="container-fluid">
-    <h3 class="text-dark mb-4">المنتجات</h3>
+    <h3 class="text-dark mb-4">التقرير </h3>
 
 
-    <a class="btn btn-primary p-3   m-3" href="{{url('/items/create')}}">اضافة</a>
+
 
 
     <div class="card shadow">
         <div class="card-header py-3">
-            <p class="text-primary m-0 fw-bold">ادارة المنتجات</p>
+            <p class="text-primary m-0 fw-bold">ادارة التقرير</p>
         </div>
         <div class="card-body">
             <div class="row">
@@ -29,42 +29,64 @@
                 <table class="table my-0" id="dataTable">
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>اسم المنتج</th>
-                            <th>العدد</th>
-                            <th>السعر الاصلي</th>
-                            <th>مجموع السعر الاصلي</th>
-                            <th>سعر البيع</th>
-                            <th>مجموع سعر البيع</th>
-                            <th>نسبة التخفيض</th>
-                            <!-- <th>السعر النهائي</th> -->
+
+
+
+                            <th> التسلسل </th>
+                            <th> رقم القائمة </th>
+                            <th>الزبون</th>
+                            <th>المنتج</th>
+                            <th>العنوان</th>
+                            <th>جهة التوصيل</th>
+                            <th>حالة الدفع</th>
+                            <th>سعر التوصيل</th>
+                            <th>السعر الكلي</th>
+                            <th>الملاحظات</th>
+                            <th>تاريخ انشاء القائمة</th>
                             <th>العمليات</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($items as $item)
+
+
+                        @foreach ($data as $report)
                         <tr>
-                            <td>{{$item->id}}</td>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->quantity}}</td>
-                            <td>د.ع{{$item->original_price}} </td>
-                            <td>د.ع{{$item->original_totla_price}}</td>
-                            <td>د.ع{{$item->price}}</td>
-                            <td>د.ع{{$item->total_price}}</td>
-                            <td>{{$item->discount}}%</td>
-                            <!-- <td>د.ع {{$item->final_price}}</td> -->
+                            <td> {{$report->reporta_id}}</td>
+
+                            <td> {{$report->invoice_id}}</td>
+
+                            <td>{{$report->customer_name}}</td>
+
+                            <td> {{$report->item_name}}</td>
+                            <td> {{$report->invoice_address}}</td>
+                            <td> {{$report->delivery_name}}</td>
+                            <td> {{$report->payment_status}}</td>
+
+                            <td> {{$report->delivery_price}}</td>
+                            <td> {{$report->total_price}}</td>
                             <td>
-                                <a class="btn btn-primary" href="{{route('items.destroy',$item->id)}}"> مسح </a>
-                                <a href="{{route('items.edit',$item)}}" class="btn btn-primary">تعديل</a>
+                                {{ Str::limit( $report->note, 10, ' (المزيد ...)')}}
                             </td>
-                            <!-- <td>33</td>
-                            <td>2008/11/28</td>
-                            <td>$162,700</td>
-                            <td>Cell 7</td>
-                            <td>Cell 8</td>
-                            <td>Cell 9</td> -->
+                            <td> {{$report->created_at}}</td>
+                            <td>
+
+                                <div class="btn btn-primary">طباعة</div>
+                            </td>
+
+
                         </tr>
+
+
+
+
+                        <!-- {{$report->invoice_address}}
+                        {{$report->payment_status}}
+                        {{$report->delivery_price}}
+                        {{$report->invoice_total_price}}
+                        {{$report->note}} -->
+
                         @endforeach
+
 
                     </tbody>
                     <tfoot>

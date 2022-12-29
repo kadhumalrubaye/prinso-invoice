@@ -25,13 +25,13 @@ class InvoiceFactory extends Factory
             'location' => fake()->address(),
             // 'destination_address' => fake()->streetAddress(),
             // 'destination_phone' => fake()->randomDigitNotZero(),
-            'payment_status' => fake()->randomElement(['pending', 'done', 'canceled']),
+            'payment_status' => fake()->randomElement(['yes', 'no']),
             // 'price' => fake()->randomDigit(),
             'customer_id' => Customer::all()->random()->id,
             'delivery_agency_id' => DeliveryAgency::all()->random()->id,
             'item_id' => Item::all()->random()->id,
-            'delivery_price' => fake()->randomDigit(),
-            'total_price' => fake()->randomDigit(),
+            'delivery_price' => fake()->randomDigit(10),
+            'total_price' => fake()->randomDigit(10),
             'note' => fake()->text(),
         ];
     }

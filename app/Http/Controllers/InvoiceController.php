@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\Customer;
 use App\Models\DeliveryAgency;
 use App\Models\Item;
+use App\Models\ReportA;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
@@ -19,8 +20,29 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::all();
-        return view('invoice', ['invoices' => $invoices]);
+        $data = Invoice::join('customers', 'customers.id', '=', 'invoices.customer_id')
+            ->join('delivery_agencies', 'delivery_agencies.id', '=', 'invoices.delivery_agency_id')
+            ->join('items', 'items.id', '=', 'invoices.item_id')
+            ->select(
+                'invoices.id as invoice_id',
+                'invoices.note as note',
+                'invoices.total_price as total_price',
+                'invoices.delivery_price as delivery_price',
+                'invoices.payment_status as payment_status',
+                'invoices.created_at as created_at',
+                'delivery_agencies.name as delivery_name',
+                'items.price as item_price',
+                'items.total_price',
+                'invoices.location as invoice_address',
+                'items.name as item_name',
+                'customers.name as customer_name',
+
+
+            )
+            ->get(['invoice_id', 'created_at', 'invoice_address', 'note', 'total_price', 'delivery_price', 'payment_status', 'customer_name', 'delivery_name', 'item_name']);
+
+        //dump($data);
+        return view('invoice', ['invoices' => $data]);
     }
 
     /**
@@ -48,7 +70,7 @@ class InvoiceController extends Controller
      */
     public function store(StoreInvoiceRequest $request)
     {
-        Invoice::create(
+        $invoice =  Invoice::create(
             [
                 'location' => $request->location,
                 'delivery_price' => $request->delivery_price,
@@ -57,12 +79,18 @@ class InvoiceController extends Controller
                 'item_id' => $request->item_id,
                 'delivery_agency_id' => $request->delivery_agency_id,
                 'note' => $request->note,
+                'payment_status' => $request->payment_status,
             ]
 
         );
-        $x = DB::table('invoices')->latest()->paginate(10);
+        ReportA::create(
+            [
+                'invoice_id' => $invoice->id
+            ]
+        );
+        // $x = DB::table('invoices')->latest()->paginate(10);
 
-        return view('invoice', ['invoices' => $x]);
+        return redirect(route('invoices.index'));
     }
 
     /**
