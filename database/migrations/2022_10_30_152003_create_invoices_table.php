@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('delivery_agency_id')->nullable();
             $table->foreign('delivery_agency_id')->references('id')->on('delivery_agency')->onDelete('cascade');
             // $table->bigInteger('destination_phone');
-            $table->enum('payment_status', ['yes', 'no']);
+            $table->enum('payment_status', ['yes', 'no'])->default('no');
             // $table->string('customer_name');
             // $table->string('delivery_agency');
             $table->double('delivery_price');

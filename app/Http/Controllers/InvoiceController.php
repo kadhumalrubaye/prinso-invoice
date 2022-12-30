@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Models\DeliveryAgency;
 use App\Models\Item;
 use App\Models\ReportA;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
@@ -52,13 +53,16 @@ class InvoiceController extends Controller
      */
     public function create()
     {
+
+
         $items = Item::all();
         $deliveries = DeliveryAgency::all();
         $customers = Customer::all();
         return view('components.invoice.create-invoice', [
             'items' => $items,
             'deliveries' => $deliveries,
-            'customers' => $customers
+            'customers' => $customers,
+            'id' => Invoice::latest()->take(1)->get(),
         ]);
     }
 
@@ -70,6 +74,37 @@ class InvoiceController extends Controller
      */
     public function store(StoreInvoiceRequest $request)
     {
+        Customer::create(
+            [
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]
+
+        );
+        $total_price = $request->price * $request->quantity;
+        $original_totla_price = $request->original_price * $request->quantity;
+        $discount = $request->discount / 100;
+        $final_price = ($total_price + $original_totla_price) * $discount;
+
+        Item::create(
+            [
+                'name' => $request->item_name,
+                'item_num' => $request->item_num,
+                'quantity' => $request->quantity,
+                'price' => $request->price,
+
+                // 'total_price' => $request->total_price,
+                'total_price' => $total_price,
+                'original_price' => $request->original_price,
+                // 'original_totla_price' => $request->original_totla_price,
+                'original_totla_price' => $original_totla_price,
+                'discount' => $request->discount,
+
+            ]
+
+        );
+
         $invoice =  Invoice::create(
             [
                 'location' => $request->location,

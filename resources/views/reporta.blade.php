@@ -33,16 +33,17 @@
 
 
                             <th> التسلسل </th>
-                            <th> رقم القائمة </th>
+                            <th> رقم الفاتورة </th>
+                            <th>التاريخ </th>
                             <th>الزبون</th>
-                            <th>المنتج</th>
+                            <th>رقم الهاتف</th>
+                            <!-- <th>المنتج</th> -->
                             <th>العنوان</th>
                             <th>جهة التوصيل</th>
-                            <th>حالة الدفع</th>
                             <th>سعر التوصيل</th>
                             <th>السعر الكلي</th>
                             <th>الملاحظات</th>
-                            <th>تاريخ انشاء القائمة</th>
+                            <th>حالة الدفع</th>
                             <th>العمليات</th>
                         </tr>
                     </thead>
@@ -54,20 +55,21 @@
                             <td> {{$report->reporta_id}}</td>
 
                             <td> {{$report->invoice_id}}</td>
+                            <td> {{$report->created_at}}</td>
 
                             <td>{{$report->customer_name}}</td>
+                            <td>{{$report->customer_phone??43434343}}</td>
 
-                            <td> {{$report->item_name}}</td>
+                            <!-- <td> {{$report->item_name}}</td> -->
                             <td> {{$report->invoice_address}}</td>
                             <td> {{$report->delivery_name}}</td>
-                            <td> {{$report->payment_status}}</td>
 
                             <td> {{$report->delivery_price}}</td>
                             <td> {{$report->total_price}}</td>
                             <td>
                                 {{ Str::limit( $report->note, 10, ' (المزيد ...)')}}
                             </td>
-                            <td> {{$report->created_at}}</td>
+                            <td> {{$report->payment_status}}</td>
                             <td>
 
                                 <div class="btn btn-primary">طباعة</div>

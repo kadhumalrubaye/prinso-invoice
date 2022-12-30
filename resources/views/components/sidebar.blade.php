@@ -6,10 +6,10 @@
         <hr class="sidebar-divider my-0">
         <ul class="navbar-nav text-light" id="accordionSidebar">
 
-            <li class="nav-item"><a class="nav-link active" href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt"></i><span>الرئيسية</span></a></li>
+            <li class="nav-item"><a class="nav-link active" href="{{ url('/')  }}"><i class="fas fa-tachometer-alt"></i><span>الرئيسية</span></a></li>
             <!-- <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>البروفايل</span></a></li> -->
             <li class="nav-item"><a class="nav-link" href="{{ route('invoices.index') }}"><i class="far fa-newspaper"></i><span>ادارة الفواتير</span></a>
-                <a class="nav-link" href="{{ url('/deliveries') }}"><i class="fas fa-car-side"></i><span>ادارة التوصيل</span></a>
+                <a class="nav-link" href="{{ route('deliveries.index') }}"><i class="fas fa-car-side"></i><span>ادارة التوصيل</span></a>
                 <a class="nav-link" href="{{ route('items.index') }}"><i class="fas fa-shopping-bag"></i><span>ادارة المنتجات</span>
                 </a>
                 <a class="nav-link" href="{{ route('customers.index') }}"><i class="fas fa-users"></i><span>ادارة الزبائن</span></a>
