@@ -17,6 +17,12 @@ class Invoice extends Model
         'note',
         'customer_id',
         'item_id',
+        'discount',
         'delivery_agency_id',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

@@ -40,7 +40,7 @@
                             <!-- <th>المنتج</th> -->
                             <th>العنوان</th>
                             <th>جهة التوصيل</th>
-                            <th>سعر التوصيل</th>
+                            <!-- <th>سعر التوصيل</th> -->
                             <th>السعر الكلي</th>
                             <th>الملاحظات</th>
                             <th>حالة الدفع</th>
@@ -64,7 +64,7 @@
                             <td> {{$report->invoice_address}}</td>
                             <td> {{$report->delivery_name}}</td>
 
-                            <td> {{$report->delivery_price}}</td>
+                            <!-- <td> {{$report->delivery_price}}</td> -->
                             <td> {{$report->total_price}}</td>
                             <td>
                                 {{ Str::limit( $report->note, 10, ' (المزيد ...)')}}

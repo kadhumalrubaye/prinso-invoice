@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->bigInteger('phone');
-            $table->text('address');
+            $table->string('address');
         });
     }
 

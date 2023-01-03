@@ -36,7 +36,7 @@
                             <th>مجموع السعر الاصلي</th>
                             <th>سعر البيع</th>
                             <th>مجموع سعر البيع</th>
-                            <th>نسبة التخفيض</th>
+
                             <!-- <th>السعر النهائي</th> -->
                             <th>العمليات</th>
                         </tr>
@@ -51,7 +51,7 @@
                             <td>د.ع{{$item->original_totla_price}}</td>
                             <td>د.ع{{$item->price}}</td>
                             <td>د.ع{{$item->total_price}}</td>
-                            <td>{{$item->discount}}%</td>
+
                             <!-- <td>د.ع {{$item->final_price}}</td> -->
                             <td>
                                 <a class="btn btn-primary" href="{{route('items.destroy',$item->id)}}"> مسح </a>

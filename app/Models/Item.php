@@ -18,7 +18,11 @@ class Item extends Model
         'original_price',
         'original_totla_price',
 
-        'discount',
+
 
     ];
+    public function invoice()
+    {
+        $this->belongsTo(Invoice::class);
+    }
 }

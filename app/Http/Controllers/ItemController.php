@@ -15,6 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
+
         $items = Item::all();
 
         return view('item', ['items' => $items]);
@@ -40,8 +41,8 @@ class ItemController extends Controller
     {
         $total_price = $request->price * $request->quantity;
         $original_totla_price = $request->original_price * $request->quantity;
-        $discount = $request->discount / 100;
-        $final_price = ($total_price + $original_totla_price) * $discount;
+        // $discount = $request->discount / 100;
+        $final_price = $total_price + $original_totla_price;
 
         Item::create(
             [
@@ -55,7 +56,7 @@ class ItemController extends Controller
                 'original_price' => $request->original_price,
                 // 'original_totla_price' => $request->original_totla_price,
                 'original_totla_price' => $original_totla_price,
-                'discount' => $request->discount,
+
 
             ]
 

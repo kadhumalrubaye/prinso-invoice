@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliveryAgencyController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ItemController;
+
 use App\Http\Controllers\ReportAController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
 Route::resource('customers', CustomerController::class);
 
 //customers.show
-
+Route::get('/items', [ItemController::class]);
 Route::resource('items', ItemController::class);
 Route::resource('invoices', InvoiceController::class);
 Route::resource('deliveries', DeliveryAgencyController::class);

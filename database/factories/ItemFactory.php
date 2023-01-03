@@ -26,7 +26,6 @@ class ItemFactory extends Factory
             'total_price' => fake()->randomDigit(10),
             'original_price' => fake()->randomDigit(10),
             'original_totla_price' => fake()->randomDigit(10),
-            'discount' => fake()->randomDigit(10),
 
         ];
     }

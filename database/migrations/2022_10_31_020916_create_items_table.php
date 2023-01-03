@@ -23,7 +23,6 @@ return new class extends Migration
             $table->double('total_price',);
             $table->double('original_price',);
             $table->double('original_totla_price',);
-            $table->double('discount',);
         });
     }
 

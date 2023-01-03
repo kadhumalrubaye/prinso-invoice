@@ -9,11 +9,12 @@ use App\Models\Customer;
 use App\Models\DeliveryAgency;
 use App\Models\Item;
 use App\Models\ReportA;
-use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class InvoiceController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -21,6 +22,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
+
+        // dump(Invoice::find(1)->items);
         $data = Invoice::join('customers', 'customers.id', '=', 'invoices.customer_id')
             ->join('delivery_agencies', 'delivery_agencies.id', '=', 'invoices.delivery_agency_id')
             ->join('items', 'items.id', '=', 'invoices.item_id')
@@ -46,6 +49,7 @@ class InvoiceController extends Controller
         return view('invoice', ['invoices' => $data]);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -53,6 +57,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
+
 
 
         $items = Item::all();
@@ -74,32 +79,35 @@ class InvoiceController extends Controller
      */
     public function store(StoreInvoiceRequest $request)
     {
-        Customer::create(
+
+        Log::info($request);
+
+        $customer =  Customer::create(
             [
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'address' => $request->address,
+                'name' => $request->name ?? 'null',
+                'phone' => $request->phone ?? 0,
+                'address' => $request->address ?? 'null',
             ]
 
         );
+
         $total_price = $request->price * $request->quantity;
         $original_totla_price = $request->original_price * $request->quantity;
-        $discount = $request->discount / 100;
-        $final_price = ($total_price + $original_totla_price) * $discount;
+        $final_price = $total_price + $original_totla_price;
 
-        Item::create(
+        $item =  Item::create(
             [
-                'name' => $request->item_name,
-                'item_num' => $request->item_num,
-                'quantity' => $request->quantity,
-                'price' => $request->price,
+                'name' => $request->item_name ?? 'null',
+                'item_num' => $request->item_num ?? 0,
+                'quantity' => $request->quantity ?? 0,
+                'price' => $request->price ?? 0,
 
                 // 'total_price' => $request->total_price,
-                'total_price' => $total_price,
-                'original_price' => $request->original_price,
+                'total_price' => $total_price ?? 0,
+                'original_price' => $request->original_price ?? 0,
                 // 'original_totla_price' => $request->original_totla_price,
-                'original_totla_price' => $original_totla_price,
-                'discount' => $request->discount,
+                'original_totla_price' => $original_totla_price ?? 0,
+
 
             ]
 
@@ -107,13 +115,14 @@ class InvoiceController extends Controller
 
         $invoice =  Invoice::create(
             [
-                'location' => $request->location,
-                'delivery_price' => $request->delivery_price,
-                'total_price' => $request->total_price,
-                'customer_id' => $request->customer_id,
-                'item_id' => $request->item_id,
+                'location' => $request->address ?? 'null',
+                'delivery_price' => $request->delivery_price ?? 0,
+                'total_price' => $request->total_price ?? 0,
+                'customer_id' => $customer->id,
+                'item_id' => $item->id,
                 'delivery_agency_id' => $request->delivery_agency_id,
-                'note' => $request->note,
+                'note' => $request->note ?? 'null',
+                'discount' => $request->descount ?? 0,
                 'payment_status' => $request->payment_status,
             ]
 

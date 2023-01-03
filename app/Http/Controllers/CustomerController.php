@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
-
+use Illuminate\Support\Facades\Log;
 
 class CustomerController extends Controller
 {
@@ -42,6 +42,7 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
+        Log::info('dfdfdfd');
         Customer::create(
             [
                 'name' => $request->name,
