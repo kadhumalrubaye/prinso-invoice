@@ -10,4 +10,8 @@ class DeliveryAgency extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'phone'];
+    public function invoices()
+    {
+        $this->hasMany(Invoice::class);
+    }
 }

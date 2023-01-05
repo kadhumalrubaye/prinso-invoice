@@ -13,7 +13,7 @@
 
         <div class="form-group">
             <label for="exampleInputEmail1"> رقم الهاتف</label>
-            <input type="phone" name="phone" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+            <input type="number" name="phone" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
             <small id="emailHelp" class="form-text text-muted"></small>
         </div>
         <div class="form-group">

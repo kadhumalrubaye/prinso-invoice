@@ -6,7 +6,6 @@ use App\Models\ReportA;
 use App\Http\Requests\StoreReportARequest;
 use App\Http\Requests\UpdateReportARequest;
 use App\Models\Invoice;
-use Illuminate\Support\Facades\DB;
 
 class ReportAController extends Controller
 {
@@ -25,7 +24,7 @@ class ReportAController extends Controller
             'report_a_s.invoice_id'
         )->join('customers', 'customers.id', '=', 'invoices.customer_id')
             ->join('delivery_agencies', 'delivery_agencies.id', '=', 'invoices.delivery_agency_id')
-            ->join('items', 'items.id', '=', 'invoices.item_id')
+            ->join('items', 'items.invoice_id', '=', 'invoices.id')
             ->select(
                 'invoices.id as invoice_id',
                 'invoices.note as note',
@@ -33,7 +32,7 @@ class ReportAController extends Controller
                 'invoices.delivery_price as delivery_price',
                 'invoices.payment_status as payment_status',
                 'invoices.location as invoice_address',
-                'items.name as item_name',
+                'items.item_name as item_name',
                 'customers.name as customer_name',
                 'delivery_agencies.name as delivery_name',
                 'invoices.created_at as created_at',
@@ -62,7 +61,7 @@ class ReportAController extends Controller
                 'invoices.delivery_price as delivery_price',
                 'invoices.payment_status as payment_status',
                 'invoices.location as invoice_address',
-                'items.name as item_name',
+                'items.item_name as item_name',
                 'customers.name as customer_name',
                 'customers.phone as customer_phone',
                 'delivery_agencies.name as delivery_name',

@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('delivery_agencies', function (Blueprint $table) {
             $table->id();
+            // $table->unsignedInteger('invoice_id')->nullable()->default(0);
+            // $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->timestamps();
             $table->string('name');
             $table->bigInteger('phone');

@@ -33,9 +33,7 @@
                             <th>اسم المنتج</th>
                             <th>العدد</th>
                             <th>السعر الاصلي</th>
-                            <th>مجموع السعر الاصلي</th>
                             <th>سعر البيع</th>
-                            <th>مجموع سعر البيع</th>
 
                             <!-- <th>السعر النهائي</th> -->
                             <th>العمليات</th>
@@ -45,12 +43,11 @@
                         @foreach ($items as $item)
                         <tr>
                             <td>{{$item->id}}</td>
-                            <td>{{$item->name}}</td>
+                            <td>{{$item->item_name}}</td>
                             <td>{{$item->quantity}}</td>
                             <td>د.ع{{$item->original_price}} </td>
-                            <td>د.ع{{$item->original_totla_price}}</td>
                             <td>د.ع{{$item->price}}</td>
-                            <td>د.ع{{$item->total_price}}</td>
+
 
                             <!-- <td>د.ع {{$item->final_price}}</td> -->
                             <td>

@@ -15,14 +15,15 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('invoice_id')->nullable()->default(0);
+            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->timestamps();
-            $table->string('name');
-            $table->bigInteger('item_num');
-            $table->integer('quantity');
+            $table->string('item_name',);
+            $table->integer('quantity',);
             $table->double('price',);
             $table->double('total_price',);
             $table->double('original_price',);
-            $table->double('original_totla_price',);
+            $table->double('total_original_price',);
         });
     }
 
@@ -31,6 +32,7 @@ return new class extends Migration
      *
      * @return void
      */
+
     public function down()
     {
         Schema::dropIfExists('items');

@@ -19,14 +19,9 @@ return new class extends Migration
             $table->string('location');
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->unsignedBigInteger('item_id');
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->unsignedBigInteger('delivery_agency_id');
-            $table->foreign('delivery_agency_id')->references('id')->on('delivery_agency')->onDelete('cascade');
-            // $table->bigInteger('destination_phone');
+            $table->foreign('delivery_agency_id')->references('id')->on('delivery_agencies')->onDelete('cascade');
             $table->enum('payment_status', ['yes', 'no'])->default('no');
-            // $table->string('customer_name');
-            // $table->string('delivery_agency');
             $table->double('delivery_price');
             $table->string('note', length: 255);
             $table->double('discount'); // delivery + item_total  price

@@ -46,16 +46,31 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         @foreach ($invoices as $invoice)
+
                         <tr>
+                            <td>{{$invoice->id }}</td>
+                            <td>
+
+                                {{$invoice->customer->name }}
+                            </td>
+                            <td>
+                                <select class="form-control" name="delivery_agency_id" id="delivery_agency_id">
+
+                                    @foreach ($invoice->items as $item)
+                                    <option value="{{ $item->item_name }}">{{ $item->item_name }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
 
 
-                            <td>{{$invoice->invoice_id }}</td>
-                            <td>{{$invoice->customer_name}}</td>
-                            <td>{{$invoice->item_name}}</td>
-                            <td>{{$invoice->invoice_address}}</td>
+                            <td>{{$invoice->location}}</td>
+                            <td>
 
-                            <td> {{$invoice->delivery_name}}</td>
+                                {{$invoice->delivery_agency->name}}
+
+                            </td>
                             <td>{{$invoice->payment_status}}</td>
                             <td>{{$invoice->delivery_price}}</td>
                             <td>{{$invoice->total_price}}</td>
@@ -67,22 +82,17 @@
                             <td>
                                 {{$invoice->created_at}}
                             </td>
-
                             <td>
 
-                                <a class="btn btn-primary">طباعة</a>
 
-
+                                <button class="btn btn-primary"> طباعة</button>
                             </td>
                             <!-- <td>$162,700</td>
-
                             <td>Cell 7</td>
                             <td>Cell 8</td> -->
                             <td><i class="fas fa-print" style="color: var(--bs-red);font-size: 36px;"></i></td>
                         </tr>
                         @endforeach
-
-
                     </tbody>
                     <tfoot>
                         <tr>

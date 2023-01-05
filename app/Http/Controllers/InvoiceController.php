@@ -9,6 +9,9 @@ use App\Models\Customer;
 use App\Models\DeliveryAgency;
 use App\Models\Item;
 use App\Models\ReportA;
+use Barryvdh\DomPDF\Facade\pdf;
+
+
 use Illuminate\Support\Facades\Log;
 
 class InvoiceController extends Controller
@@ -22,31 +25,10 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-
-        // dump(Invoice::find(1)->items);
-        $data = Invoice::join('customers', 'customers.id', '=', 'invoices.customer_id')
-            ->join('delivery_agencies', 'delivery_agencies.id', '=', 'invoices.delivery_agency_id')
-            ->join('items', 'items.id', '=', 'invoices.item_id')
-            ->select(
-                'invoices.id as invoice_id',
-                'invoices.note as note',
-                'invoices.total_price as total_price',
-                'invoices.delivery_price as delivery_price',
-                'invoices.payment_status as payment_status',
-                'invoices.created_at as created_at',
-                'delivery_agencies.name as delivery_name',
-                'items.price as item_price',
-                'items.total_price',
-                'invoices.location as invoice_address',
-                'items.name as item_name',
-                'customers.name as customer_name',
+        $data = Invoice::with(['items', 'customer', 'delivery_agency'])->get();
 
 
-            )
-            ->get(['invoice_id', 'created_at', 'invoice_address', 'note', 'total_price', 'delivery_price', 'payment_status', 'customer_name', 'delivery_name', 'item_name']);
-
-        //dump($data);
-        return view('invoice', ['invoices' => $data]);
+        return view('invoice', ['invoices' => $data,]);
     }
 
 
@@ -57,8 +39,6 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-
-
 
         $items = Item::all();
         $deliveries = DeliveryAgency::all();
@@ -80,53 +60,54 @@ class InvoiceController extends Controller
     public function store(StoreInvoiceRequest $request)
     {
 
-        Log::info($request);
+        dump($request);
+        //create customer
+        $customer = new Customer();
+        $customer->name = $request->customer_name;
+        $customer->phone = $request->customer_phone;
+        $customer->address = $request->customer_address;
+        $customer->save();
 
-        $customer =  Customer::create(
-            [
-                'name' => $request->name ?? 'null',
-                'phone' => $request->phone ?? 0,
-                'address' => $request->address ?? 'null',
-            ]
+        // $de = new DeliveryAgency();
+        // $de->name = 'kadhum';
+        // $de->phone = 98;
 
-        );
-
-        $total_price = $request->price * $request->quantity;
-        $original_totla_price = $request->original_price * $request->quantity;
-        $final_price = $total_price + $original_totla_price;
-
-        $item =  Item::create(
-            [
-                'name' => $request->item_name ?? 'null',
-                'item_num' => $request->item_num ?? 0,
-                'quantity' => $request->quantity ?? 0,
-                'price' => $request->price ?? 0,
-
-                // 'total_price' => $request->total_price,
-                'total_price' => $total_price ?? 0,
-                'original_price' => $request->original_price ?? 0,
-                // 'original_totla_price' => $request->original_totla_price,
-                'original_totla_price' => $original_totla_price ?? 0,
+        // $de->save();
 
 
-            ]
 
-        );
 
-        $invoice =  Invoice::create(
-            [
-                'location' => $request->address ?? 'null',
-                'delivery_price' => $request->delivery_price ?? 0,
-                'total_price' => $request->total_price ?? 0,
-                'customer_id' => $customer->id,
-                'item_id' => $item->id,
-                'delivery_agency_id' => $request->delivery_agency_id,
-                'note' => $request->note ?? 'null',
-                'discount' => $request->descount ?? 0,
-                'payment_status' => $request->payment_status,
-            ]
+        //get items array from requers
+        $items = $request['items'];
 
-        );
+
+        $invoice = new Invoice();
+        $invoice->location = $request->customer_address ?? 'null';
+        $invoice->delivery_price = $request->delivery_price ?? 0;
+        $invoice->total_price =  $request->total_price;
+        $invoice->note = $request->note ?? 'null';
+        $invoice->discount = $request->descount ?? 0;
+        $invoice->payment_status = $request->payment_status;
+        $invoice->delivery_agency_id = $request->delivery_agency_id;
+        $invoice->customer_id = $customer->id;
+
+
+        $invoice->save();
+
+
+
+
+        $invoice_model = Invoice::find($invoice->id);
+        $invoice_model->items()->createMany($items);
+        $invoice_model->customer()->associate($customer);
+        // $invoice_model->delivery_agency_id = $de->id;
+        // $invoice_model->delivery_agency()->associate($de);
+        $invoice_model->save();
+
+
+
+
+
         ReportA::create(
             [
                 'invoice_id' => $invoice->id
@@ -135,6 +116,13 @@ class InvoiceController extends Controller
         // $x = DB::table('invoices')->latest()->paginate(10);
 
         return redirect(route('invoices.index'));
+    }
+
+    public function createInvoice()
+    {
+
+        // $pdf = Pdf::loadView('pdf.invoice', $data);
+        // return $pdf->download('invoice.pdf');
     }
 
     /**

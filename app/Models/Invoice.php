@@ -15,14 +15,23 @@ class Invoice extends Model
         'total_price',
         'payment_status',
         'note',
-        'customer_id',
-        'item_id',
         'discount',
+        'customer_id',
         'delivery_agency_id',
+        // 'item_id',
     ];
 
     public function items()
     {
         return $this->hasMany(Item::class);
+    }
+
+    public function delivery_agency()
+    {
+        return $this->belongsTo(DeliveryAgency::class);
+    }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
     }
 }

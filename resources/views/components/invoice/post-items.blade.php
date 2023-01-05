@@ -1,59 +1,51 @@
-<div id="table-container">
-    <table class="table  table-bordered " id="item-form">
+      <!-- post items  1-->
 
-        <thead class="table-light">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col"><label for="exampleInputEmail1">اسم المنتح</label></th>
-                <!-- <th scope="col"><label for="exampleInputEmail1"> رقم المنتج</label></th> -->
-                <th scope="col"> <label for="exampleInputEmail1"> الكمية</label></th>
-                <th scope="col"> <label for="exampleInputEmail1">سعر البيع</label></th>
-                <th scope="col"> <label for="exampleInputEmail1">السعر الاصلي</label></th>
+      <table class="table  table-bordered " id="item-form">
 
-                <!-- <th scope="col"><label for="exampleInputEmail1">العنوان </label></th> -->
-                <!-- <th scope="col"><label for="exampleInputEmail1">السعر الكلي </label></th> -->
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>
-                    <div class="form-group">
 
-                        <input type="text" name="item_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-                        <small id="emailHelp" class="form-text text-muted"></small>
-                    </div>
-                </td>
-                <!-- <td>
-                            <div class="form-group">
+          <tbody>
+              <tr>
+                  <th scope="row">1</th>
+                  <td>
+                      <div class="form-group">
 
-                                <input type="number" name="item_num" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-                                <small id="emailHelp" class="form-text text-muted"></small>
-                            </div>
-                        </td> -->
-                <td>
-                    <div class="form-group">
+                          <input type="text" name="items[0][item_name]" class="form-control" id="itemName" aria-describedby="emailHelp" placeholder="اسم المنتج">
+                          <small id="emailHelp" class="form-text text-muted"></small>
+                      </div>
+                  </td>
 
-                        <input type="number" name="quantity" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-                        <small id="emailHelp" class="form-text text-muted"></small>
-                    </div>
-                </td>
-                <th scope="row">
-                    <div class="form-group">
+                  <td>
+                      <div class="form-group">
 
-                        <input type="number" name="original_price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-                        <small id="emailHelp" class="form-text text-muted"></small>
-                    </div>
-                </th>
-                <td>
-                    <div class="form-group">
+                          <input type="number" name="items[0][quantity]" class="form-control" id="itemQuantity" aria-describedby="emailHelp" placeholder="الكمية" onblur="quantityVspriceVsoriginalPrice()">
+                          <small id="emailHelp" class="form-text text-muted"></small>
+                      </div>
+                  </td>
+                  <th scope="row">
+                      <div class="form-group">
 
-                        <input type="number" name="price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-                        <small id="emailHelp" class="form-text text-muted"></small>
-                    </div>
-                </td>
+                          <input type="number" name="items[0][original_price]" class="form-control" id="itemOrginalPrice" aria-describedby="emailHelp" placeholder="السعر الاصلي">
+                          <small id="emailHelp" class="form-text text-muted"></small>
+                      </div>
+                  </th>
+                  <!-- <th scope="row">
+                          total origianl
+                      </th> -->
+                  <td>
+                      <div class="form-group">
 
-                <!-- <td>
+                          <input type="number" onchange="getTotalPrice()" name="items[0][price]" class="form-control" id="itemPrice" aria-describedby="emailHelp" placeholder="سعر البيع">
+                          <small id="emailHelp" class="form-text text-muted"></small>
+                      </div>
+                  </td>
+                  <!-- <td>
+                          total price
+                      </td> -->
+                  <td>
+                      <div class="btn btn-primary" onclick="removeItemForm()">حذف</div>
+                  </td>
+
+                  <!-- <td>
                             <div class="form-group">
 
                                 <input type="text" name="location" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
@@ -62,16 +54,14 @@
                         </td> -->
 
 
-            </tr>
+              </tr>
 
 
-        </tbody>
-        <tfoot>
-            <tr>
+          </tbody>
+          <tfoot>
+              <tr>
 
 
-            </tr>
-        </tfoot>
-    </table>
-
-</div>
+              </tr>
+          </tfoot>
+      </table>

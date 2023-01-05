@@ -23,9 +23,9 @@ class ItemFactory extends Factory
             'quantity' => fake()->randomDigit(10),
             'price' => fake()->randomDigit(10),
             // 'single_price' => fake()->randomDigit(),
-            'total_price' => fake()->randomDigit(10),
+
             'original_price' => fake()->randomDigit(10),
-            'original_totla_price' => fake()->randomDigit(10),
+
 
         ];
     }
