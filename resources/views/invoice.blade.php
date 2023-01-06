@@ -85,7 +85,7 @@
                             <td>
 
 
-                                <button class="btn btn-primary"> طباعة</button>
+                                <a class="btn btn-primary" href="{{route('invoices.edit', $invoice)}}"> تعديل</a>
                             </td>
                             <!-- <td>$162,700</td>
                             <td>Cell 7</td>

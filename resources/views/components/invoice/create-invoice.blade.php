@@ -34,22 +34,22 @@
             <div class="row">
                 <div class="col-sm">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">اسم الزبون</label>
-                        <input type="text" name="customer_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                        <label for="customerName">اسم الزبون</label>
+                        <input type="text" name="customer_name" class="form-control" id="customerName" aria-describedby="customerName">
                         <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> رقم الهاتف</label>
-                        <input type="number" name="customer_phone" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                        <input type="number" name="customer_phone" class="form-control" id="customerPhone" aria-describedby="customerPhone">
                         <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
-                        <label for="exampleInputEmail1"> العنوان</label>
-                        <input type="text" name="customer_address" class="form-control" id="exampleInputEmail1" aria-describedby="addressHelp" placeholder="">
+                        <label for="address"> العنوان</label>
+                        <input type="text" name="customer_address" class="form-control" id="address" aria-describedby="addressHelp">
                         <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
@@ -66,11 +66,11 @@
                 </div>
                 <div class="col-sm">
 
-                    <label for="exampleInputEmail1"> سعر التوصيل</label>
+                    <label for="deliveryPriceLabel"> سعر التوصيل</label>
 
                     <div class="form-group">
 
-                        <input type="number" name="delivery_price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                        <input type="number" name="delivery_price" class="form-control" id="deliveryPrice" aria-describedby="deliveryPrice">
                         <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
 
@@ -80,9 +80,9 @@
                 <div class="col-sm">
 
                     <div class="form-group">
-                        <label for="exampleInputEmail1"> الخصم</label>
+                        <label for="discount"> الخصم</label>
 
-                        <input type="number" name="discount" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                        <input type="number" name="discount" class="form-control" id="discount" aria-describedby="discount" placeholder="">
                         <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
 
@@ -91,7 +91,7 @@
         </div>
         <br />
 
-        <div class="h3">اظافة منتجات</div>
+        <div class="h3">اضافة منتجات</div>
         <div id="table-container">
             @include('components.invoice.post-items')
         </div>
@@ -102,7 +102,7 @@
             <script>
 
             </script>
-            <div id="duplicateItemForm" class="btn btn-primary" onclick="duplicateAddNewItemForm()">
+            <div id="duplicateItemForm" class="btn btn-primary">
 
                 اضافة
             </div>
@@ -110,7 +110,7 @@
 
             <div class="form-group">
         <th scope="col"><label for="exampleInputEmail1">السعر الكلي </label></th>
-        <input onfocus="quantityVspriceVsoriginalPrice() " type="number" name="total_price" class="form-control" id="invoiceTotalPrice" aria-describedby="emailHelp" placeholder="">
+        <input type="number" name="total_price" class="form-control" id="invoiceTotalPrice" aria-describedby="emailHelp" placeholder="">
         <small id="emailHelp" class="form-text text-muted"></small>
 </div>
 

@@ -133,8 +133,6 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        $invoices = Invoice::all();
-        return view('invoice', ['invoices' => $invoices]);
     }
 
     /**
@@ -145,7 +143,17 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
-        //
+
+        $delivery = DeliveryAgency::find($invoice->id);
+        $items = Item::where("invoice_id", $invoice->id)->get();
+        $customer = Customer::find($invoice->customer_id);
+        return view('components.invoice.edit-invoice', [
+            'invoice' => $invoice,
+            'delivery' => $delivery,
+            'items' => $items,
+
+            'customer' => $customer
+        ]);
     }
 
     /**
@@ -157,7 +165,64 @@ class InvoiceController extends Controller
      */
     public function update(UpdateInvoiceRequest $request, Invoice $invoice)
     {
-        //
+
+        //create customer
+
+        $customer =  Customer::find($invoice->customer_id);
+
+        $customer->update([
+            'name' => $request->customer_name,
+            'phone' => $request->customer_phone,
+            'address' => $request->customer_address
+        ]);
+        $customer->save();
+        // $de = new DeliveryAgency();
+        // $de->name = 'kadhum';
+        // $de->phone = 98;
+
+        // $de->save();
+
+
+
+
+        //get items array from requers
+        $items = $request['items'];
+
+
+        // $invoice =  Invoice::find($invoice->id);
+        // $invoice->location = $request->customer_address ?? 'null';
+        // $invoice->delivery_price = $request->delivery_price ?? 0;
+        // $invoice->total_price =  $request->total_price;
+        // $invoice->note = $request->note ?? 'null';
+        // $invoice->discount = $request->descount ?? 0;
+        // $invoice->payment_status = $request->payment_status;
+        // $invoice->delivery_agency_id = $request->delivery_agency_id;
+        // $invoice->customer_id = $customer->id;
+        //$invoice->save();
+
+        $invoice->update($request->all());
+        $itemsModel = [];
+        $invoice->items()->delete();
+        foreach ($items as $item) {
+            array_push($itemsModel,  new Item($item));
+        }
+        $invoice->items()->saveMany($itemsModel);
+        $invoice->save();
+
+
+
+
+
+
+
+        // $invoice_model = Invoice::find($invoice->id);
+        // $invoice_model->items()->createMany($items);
+        // $invoice_model->customer()->associate($customer);
+        // // $invoice_model->delivery_agency_id = $de->id;
+        // // $invoice_model->delivery_agency()->associate($de);
+        // $invoice_model->save();
+
+        return redirect()->route('invoices.index')->with('success', ' updated successfully');
     }
 
     /**

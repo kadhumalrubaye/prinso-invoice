@@ -3,6 +3,7 @@ import './bootstrap';
 import 'laravel-datatables-vite';
 import Alpine from 'alpinejs';
 import $ from 'jquery';
+import { random } from 'lodash';
 
 
 window.Alpine = Alpine;
@@ -49,93 +50,110 @@ function getTotalPrice() {
 
 
 //duplicate item form
-$(document).ready(function () {
+jQuery(function () {
     var counter = 0;
-    $('#duplicateItemForm').click(function () {
+    $('#duplicateItemForm').on({
+        click: function () {
+            counter++;
 
-        counter++;
+            $("<table>").addClass('table table-bordered').append(
+                $('<tbody>').append(
+                    $('<tr>').append(
+                        $('<td>').append(
+                            $('<th>').addClass('scope="col" item_id ').attr({
 
-        $("<table>").addClass('table table-bordered').append(
-            $('<tbody>').append(
-                $('<tr>').append(
-                    $('<td>').append(
-                        $('<th>').addClass('scope="col" ').attr({
+                                type: 'text',
 
-                            type: 'text',
+                                id: counter
+                            }).text(counter)
 
-                            id: 'itemName_' + counter
-                        }).text(counter + 1)
+                        ),
+                        $('<td>').append(
+                            $('<input>').addClass('form-control').attr({
+                                placeholder: "اسم المنتج",
+                                type: 'text',
+                                name: `items[${counter}][item_name]`,
+                                id: 'itemName_' + counter
+                            })
 
-                    ),
-                    $('<td>').append(
-                        $('<input>').addClass('form-control').attr({
-                            placeholder: "اسم المنتج",
-                            type: 'text',
-                            name: `items[${counter}][item_name]`,
-                            id: 'itemName_' + counter
-                        })
+                        ),
+                        $('<td>').append(
+                            $('<input>').addClass('form-control').attr({
+                                placeholder: " الكمية",
+                                type: 'number',
+                                name: `items[${counter}][quantity]`,
+                                id: 'itemQuantity_' + counter
+                            })
 
-                    ),
-                    $('<td>').append(
-                        $('<input>').addClass('form-control').attr({
-                            placeholder: " الكمية",
-                            type: 'number',
-                            name: `items[${counter}][quantity]`,
-                            id: 'itemQuantity_' + counter
-                        })
+                        ),
+                        $('<td>').append(
+                            $('<input>').addClass('form-control').attr({
+                                placeholder: "السعر الاصلي ",
+                                type: 'number',
+                                name: `items[${counter}][original_price]`,
+                                id: 'itemOrginalPrice_' + counter
+                            })
 
-                    ),
-                    $('<td>').append(
-                        $('<input>').addClass('form-control').attr({
-                            placeholder: "السعر الاصلي ",
-                            type: 'number',
-                            name: `items[${counter}][original_price]`,
-                            id: 'itemOrginalPrice_' + counter
-                        })
+                        ),
+                        $('<td>').append(
+                            $('<input>').addClass('form-control itemPrice').attr({
+                                placeholder: "سعر البيع ",
+                                type: 'number',
+                                name: `items[${counter}][price]`,
+                                id: 'itemPrice_' + counter
+                            })
 
-                    ),
-                    $('<td>').append(
-                        $('<input>').addClass('form-control').attr({
-                            placeholder: "سعر البيع ",
-                            type: 'number',
-                            name: `items[${counter}][price]`,
-                            id: 'itemPrice_' + counter
-                        })
+                        ),
+                        $('<td>').append(
+                            $('<div>').addClass('btn btn-primary ').attr({
 
-                    ),
-                    $('<td>').append(
-                        $('<div>').addClass('btn btn-primary ').attr({
+                                type: 'button',
 
-                            type: 'button',
+                                id: "removeItemBtn",
+                            }).text("حذف")
+                                .on({
 
-                            id: counter
-                        }).text("حذف").on({
-                            click: function () { $(`#item-table-${this.id}`).remove(); }
-                        },)
+                                    click: function () {
 
-                    ),
+
+                                        this.closest("table").remove();
+                                    }
+                                },)
+
+                        ),
+                    )
                 )
-            )
-        ).attr({
-            id: `item-table-${counter}`
-        }).appendTo('#table-container');
+            ).attr({
+                id: `item-table-${counter}`
+            }).appendTo('#table-container');
+
+        }
+    }
 
 
-    });
+    );
 });
 
+// $(document).ready(
+//     function () {
+
+//     }
+// );
 
 
+$(document).on("click", '.remove-item', function () {
+    $("#removeItemBtn").closest("#item-form").remove();
 
+});
 
 $(document).jquery(
     $("#invoiceTotalPrice").on({
         focus: function () {
 
             console.log('ok');
-            let itemQuantites = $('#table-container :input#itemQuantity');
+            let itemQuantites = $('#table-container :input#itemQuantity_0');
 
-            let itemPrices = $('#table-container :input#itemPrice');
+            let itemPrices = $('input.itemPrice');
 
             var totalPrices = 0;
             itemPrices.each(function () {
