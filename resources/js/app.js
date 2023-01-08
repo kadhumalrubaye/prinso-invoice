@@ -6,6 +6,8 @@ import $ from 'jquery';
 import { random } from 'lodash';
 
 
+import 'jquery-ui/ui/widgets/datepicker';
+
 window.Alpine = Alpine;
 
 Alpine.start();
@@ -134,13 +136,45 @@ jQuery(function () {
     );
 });
 
-// $(document).ready(
-//     function () {
+//datetimve picker
+$(function () {
+    var dateFormat = "mm/dd/yy",
+        from = $("#datetimepicker")
+            .datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 3
+            })
+            .on("change", function () {
+                to.datepicker("option", "minDate", getDate(this));
+            }),
+        to = $("#to").datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 3
+        })
+            .on("change", function () {
+                from.datepicker("option", "maxDate", getDate(this));
+            });
 
-//     }
-// );
+    function getDate(element) {
+        var date;
+        try {
+            date = $.datepicker.parseDate(dateFormat, element.value);
+        } catch (error) {
+            date = null;
+        }
+
+        return date;
+    }
+});
 
 
+
+
+
+
+//---
 $(document).on("click", '.remove-item', function () {
     $("#removeItemBtn").closest("#item-form").remove();
 

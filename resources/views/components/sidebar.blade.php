@@ -14,6 +14,7 @@
                 </a>
                 <a class="nav-link" href="{{ route('customers.index') }}"><i class="fas fa-users"></i><span>ادارة الزبائن</span></a>
                 <a class="nav-link" href="{{ route('reporta.index') }}"><i class="fas fa-car-side"></i><span>تقرير المبيعات </span></a>
+                <a class="nav-link" href="{{ route('invoices.profits') }}"><i class="fas fa-car-side"></i><span>تقرير الأرباح </span></a>
 
             </li>
             <!-- <li class="nav-item"><a class="nav-link" href="{{ url('/login') }}"><i class="far fa-user-circle"></i><span>الدخول</span></a></li>

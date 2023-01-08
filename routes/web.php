@@ -39,6 +39,7 @@ Route::resource('customers', CustomerController::class);
 //customers.show
 Route::get('/items', [ItemController::class]);
 Route::resource('items', ItemController::class);
+Route::get('/invoices/profits', [InvoiceController::class, 'getProfits'])->name('invoices.profits');
 Route::resource('invoices', InvoiceController::class);
 Route::resource('deliveries', DeliveryAgencyController::class);
 Route::resource('reporta', ReportAController::class);

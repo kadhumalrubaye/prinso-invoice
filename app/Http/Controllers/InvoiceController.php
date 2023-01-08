@@ -12,31 +12,35 @@ use App\Models\ReportA;
 use Barryvdh\DomPDF\Facade\pdf;
 
 
+
 use Illuminate\Support\Facades\Log;
 
 class InvoiceController extends Controller
 {
 
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $data = Invoice::with(['items', 'customer', 'delivery_agency'])->get();
+        $startDate = '2023-01-05';
+        $endDate = '2023-01-06';
 
+        // $posts = DB::table('posts')
+        //             ->whereBetween('created_at', [$startDate, $endDate])
+        //             ->get();
+        $data = Invoice::with(['items', 'customer', 'delivery_agency'])
+            // ->whereBetween('created_at', [$startDate, $endDate])
+            // ->orderBy('payment_status', 'asc')
+            // ->orderBy('id', 'asc')
+            ->orderBy('created_at', 'desc')
+            // ->orderBy('delivery_agency_id', 'desc')
+            ->get();
 
         return view('invoice', ['invoices' => $data,]);
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
 
@@ -51,16 +55,11 @@ class InvoiceController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreInvoiceRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(StoreInvoiceRequest $request)
     {
 
-        dump($request);
+
         //create customer
         $customer = new Customer();
         $customer->name = $request->customer_name;
@@ -73,8 +72,6 @@ class InvoiceController extends Controller
         // $de->phone = 98;
 
         // $de->save();
-
-
 
 
         //get items array from requers
@@ -125,49 +122,34 @@ class InvoiceController extends Controller
         // return $pdf->download('invoice.pdf');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Invoice $invoice)
     {
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Invoice $invoice)
     {
 
-        $delivery = DeliveryAgency::find($invoice->id);
+        $invoice_delivery = DeliveryAgency::find($invoice->delivery_agency_id);
+        $deliveries = DeliveryAgency::all();
         $items = Item::where("invoice_id", $invoice->id)->get();
         $customer = Customer::find($invoice->customer_id);
         return view('components.invoice.edit-invoice', [
             'invoice' => $invoice,
-            'delivery' => $delivery,
+            'invoice_delivery' => $invoice_delivery,
+            'deliveries' => $deliveries,
             'items' => $items,
 
             'customer' => $customer
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateInvoiceRequest  $request
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(UpdateInvoiceRequest $request, Invoice $invoice)
     {
 
-        //create customer
-
+        //update customer
         $customer =  Customer::find($invoice->customer_id);
 
         $customer->update([
@@ -176,12 +158,8 @@ class InvoiceController extends Controller
             'address' => $request->customer_address
         ]);
         $customer->save();
-        // $de = new DeliveryAgency();
-        // $de->name = 'kadhum';
-        // $de->phone = 98;
 
-        // $de->save();
-
+        //update delivery agency 
 
 
 
@@ -189,16 +167,6 @@ class InvoiceController extends Controller
         $items = $request['items'];
 
 
-        // $invoice =  Invoice::find($invoice->id);
-        // $invoice->location = $request->customer_address ?? 'null';
-        // $invoice->delivery_price = $request->delivery_price ?? 0;
-        // $invoice->total_price =  $request->total_price;
-        // $invoice->note = $request->note ?? 'null';
-        // $invoice->discount = $request->descount ?? 0;
-        // $invoice->payment_status = $request->payment_status;
-        // $invoice->delivery_agency_id = $request->delivery_agency_id;
-        // $invoice->customer_id = $customer->id;
-        //$invoice->save();
 
         $invoice->update($request->all());
         $itemsModel = [];
@@ -225,14 +193,36 @@ class InvoiceController extends Controller
         return redirect()->route('invoices.index')->with('success', ' updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Invoice $invoice)
     {
         //
+    }
+    public function getProfits()
+    {
+        $totalPrice = Invoice::all()->sum('total_price');
+        $payed = Invoice::where('payment_status', 'yes')->count();
+        $notPayed = Invoice::where('payment_status', 'no')->count();
+        $total = Invoice::all()->count();
+
+
+        $startDate = '2023-01-05';
+        $endDate = '2023-01-06';
+
+        $invoices = Invoice::whereDate('created_at', '>=', $startDate)
+            ->whereDate('created_at', '<=', $endDate)
+            ->get();
+        $profites = $invoices->sum('total_price');
+
+
+        return view('components.invoice.profits', [
+            'profits' => $profites,
+            'invoices' => $invoices,
+            'totalPice' => $totalPrice,
+            'payed' => $payed,
+            'notPayed' => $notPayed,
+            'total' => $total,
+
+        ]);
     }
 }

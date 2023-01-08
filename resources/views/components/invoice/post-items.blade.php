@@ -42,7 +42,7 @@
                           total price
                       </td> -->
                   <td>
-                      <div id="removeItemBtn" class="btn btn-primary" ">حذف</div>
+                      <div id="removeItemBtn" class="btn btn-primary remove-item" ">حذف</div>
                   </td>
 
 

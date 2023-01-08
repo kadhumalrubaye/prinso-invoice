@@ -47,15 +47,21 @@
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> العنوان</label>
-                        <input value="{{$customer->address}}" type="text" name="customer_address" class="form-control" id="exampleInputEmail1" aria-describedby="addressHelp" placeholder="">
+                        <input value="{{$customer->address}}" type="text" name="customer_address" class="form-control" id="customerAddress" aria-describedby="addressHelp" placeholder="">
                         <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="category">جهة التوصيل</label>
-                        <input value="{{$delivery->name ??null}}" type="text" name="delivery_agency" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
 
+                        <select class="form-control" name="delivery_agency_id" id="delivery_agency_id">
+
+                            <option value="{{ $invoice_delivery->id }}"><u>[{{ $invoice_delivery->name }}]</u></option>
+                            @foreach ($deliveries as $delivery)
+                            <option value="{{ $delivery->id }}">{{ $delivery->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="col-sm">
