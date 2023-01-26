@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container">
+<div class="container ">
 
 
 
@@ -13,17 +13,16 @@
                     <div class="badge bg-secondary fs-0 ">
                         {{$invoice->id}}
                     </div>
-
-
                     <br />
                     {{$invoice->created_at}}
+                    <br />
+                    <br />
                     <br />
                     <hr>
                 </h3>
             </div>
         </div>
     </div>
-
 
     <form method="post" action="{{route('invoices.update',$invoice)}}">
         @method('patch')
@@ -33,14 +32,14 @@
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="exampleInputEmail1">اسم الزبون</label>
-                        <input value="{{$customer->name}}" type="text" name="customer_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                        <input value="{{$customer->name}}" type="text" name="customer_name" class="form-control" id="exampleInputEmail1" aria-describedby="text" placeholder="">
                         <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="exampleInputEmail1"> رقم الهاتف</label>
-                        <input value="{{$customer->phone}}" type="number" name="customer_phone" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                        <input value="{{$customer->phone}}" type="number" name="customer_phone" class="form-control" id="exampleInputEmail1" aria-describedby="text" placeholder="">
                         <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
@@ -65,27 +64,20 @@
                     </div>
                 </div>
                 <div class="col-sm">
-
                     <label for="exampleInputEmail1"> سعر التوصيل</label>
-
                     <div class="form-group">
-
-                        <input value="{{$invoice->delivery_price}}" type="number" name="delivery_price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                        <input value="{{$invoice->delivery_price}}" type="number" name="delivery_price" class="form-control" id="exampleInputEmail1" aria-describedby="text" placeholder="">
                         <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
 
 
                 </div>
-
                 <div class="col-sm">
-
                     <div class="form-group">
                         <label for="exampleInputEmail1"> الخصم</label>
-
-                        <input value="{{$invoice->discount}}" type="number" name="discount" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                        <input value="{{$invoice->discount}}" type="number" name="discount" class="form-control" id="exampleInputEmail1" aria-describedby="text" placeholder="">
                         <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -95,30 +87,25 @@
         <div id="table-container">
             @foreach ($items as $item )
             <table class="table  table-bordered " id="item-form">
-
-
                 <tbody>
                     <tr>
                         <th scope="row">{{$item->id}}</th>
                         <td>
                             <div class="form-group">
-
-                                <input type="text" name="items[{{$item->id}}][item_name]" class="form-control  " id="itemName_0" aria-describedby="emailHelp" placeholder="اسم المنتج" value="{{$item->item_name}}">
+                                <input type="text" name="items[{{$item->id}}][item_name]" class="form-control  " id="itemName_0" aria-describedby="text" placeholder="اسم المنتج" value="{{$item->item_name}}">
                                 <small id="emailHelp" class="form-text text-muted"></small>
                             </div>
                         </td>
-
                         <td>
                             <div class="form-group">
-
-                                <input type="number" name="items[{{$item->id}}][quantity]" class="form-control itemQuantity" id="itemQuantity_0" aria-describedby="emailHelp" placeholder="الكمية" onblur="quantityVspriceVsoriginalPrice()" value="{{$item->quantity}}">
+                                <input type="number" name="items[{{$item->id}}][quantity]" class="form-control itemQuantity" id="itemQuantity_0" aria-describedby="text" placeholder="الكمية" value="{{$item->quantity}}">
                                 <small id="emailHelp" class="form-text text-muted"></small>
                             </div>
                         </td>
                         <th scope="row">
                             <div class="form-group">
 
-                                <input type="number" name="items[{{$item->id}}][original_price]" class="form-control " id="itemOrginalPrice_0" aria-describedby="emailHelp" placeholder="السعر الاصلي" value="{{$item->original_price}}">
+                                <input type="number" name="items[{{$item->id}}][original_price]" class="form-control itemCostPrice " id="itemOrginalPrice_0" aria-describedby="text" placeholder="السعر الكلفة" value="{{$item->original_price}}">
                                 <small id="emailHelp" class="form-text text-muted"></small>
                             </div>
                         </th>
@@ -128,12 +115,12 @@
                         <td>
                             <div class="form-group-">
 
-                                <input type="number" name="items[{{$item->id}}][price]" class="form-control itemPrice" id="itemPrice_0" aria-describedby="emailHelp" placeholder="سعر البيع" value="{{$item->price}}">
+                                <input type="number" name="items[{{$item->id}}][price]" class="form-control itemPrice" id="itemPrice_0" aria-describedby="text" placeholder="سعر البيع" value="{{$item->price}}">
                                 <small id="emailHelp" class="form-text text-muted"></small>
                             </div>
                         </td>
                         <td>
-                            <div id="removeItemBtn" " class=" btn btn-primary remove-item">حذف</div>
+                            <div id="removeItemBtn" class=" btn btn-danger remove-item">حذف</div>
                         </td>
                         <!-- <td>
                 total price
@@ -167,43 +154,53 @@
             </div>
             <br />
 
-            <div class="form-group">
-        <th scope="col"><label for="exampleInputEmail1">السعر الكلي </label></th>
-        <input type="number" name="total_price" class="form-control" id="invoiceTotalPrice" aria-describedby="emailHelp" placeholder="">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+        <th scope="col"><label for="exampleInputEmail1">السعر الاصلي الكلي </label></th>
+        <input type="number" name="total_price" class="form-control" id="invoiceTotalPrice" aria-describedby="text" placeholder="">
         <small id="emailHelp" class="form-text text-muted"></small>
 </div>
 
+</div>
+<div class="form-group">
+    <th scope="col"><label for="exampleInputEmail1">السعر الكلفة الكلي </label></th>
+    <input type="number" name="cost_total_price" class="form-control costTotalPrice" id="costTotalPrice" aria-describedby="text" placeholder="">
+    <small id="emailHelp" class="form-text text-muted"></small>
+</div>
+</div>
 </td>
-
-
 
 <div class="form-group">
     <label for="exampleInputEmail1">الملاحضات </label>
-    <textarea type="text" name="note" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">{{$invoice->note}}</textarea>
+    <textarea type="text" name="note" class="form-control" id="exampleInputEmail1" aria-describedby="text" placeholder="">{{$invoice->note}}</textarea>
     <small id="emailHelp" class="form-text text-muted"></small>
 </div>
 
 <div class="form-group ">
     <label for="category" class="form-label"> حالة الدفع:</label>
     <span class="lable label-primary font-weight-bold"> {{$invoice->payment_status}}</span>
-
     <select class="form-control" name="payment_status" id="item_id">
-
-
         <option value="no">غير مدفوع</option>
         <option value="yes">مدفوع</option>
-
     </select>
 </div>
-
 <br />
 
-<button id="formSubmitButton" type="submit" class="btn btn-primary">حفظ</button>
-</form>
-
+<div class="row">
+    <div class="col">
+        <button id="formSubmitButton" type="submit" class="btn btn-primary">حفظ</button>
+    </div>
+    <div class="col d-flex justify-content-end">
+        <form method="post" action="{{route('invoices.destroy',$invoice)}}">
+            @method('delete')
+            @csrf
+            <button type="submit" class="btn btn-danger ml-auto  ">حذف</button>
+        </form>
+    </div>
 </div>
-
-
-
-
+</form>
+</div>
+<br />
+<br />
 @endsection

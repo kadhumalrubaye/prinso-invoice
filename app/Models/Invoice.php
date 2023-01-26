@@ -14,6 +14,7 @@ class Invoice extends Model
         'payment_status',
         'delivery_price',
         'total_price',
+        'cost_total_price',
         'payment_status',
         'note',
         'discount',

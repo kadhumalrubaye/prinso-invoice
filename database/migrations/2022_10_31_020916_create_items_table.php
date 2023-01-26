@@ -21,9 +21,8 @@ return new class extends Migration
             $table->string('item_name',);
             $table->integer('quantity',);
             $table->double('price',);
-            $table->double('total_price',);
+
             $table->double('original_price',);
-            $table->double('total_original_price',);
         });
     }
 

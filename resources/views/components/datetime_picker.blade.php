@@ -1,7 +1,9 @@
- <fomr class="form-group">
-     <label for="from">From</label>
-     <input type="text" id="datetimepicker" name="from">
-     <label for="to">to</label>
-     <input type="text" id="to" name="to">
-     <button> submit</button>
-     </form>
+ <form method="GET" action="{{ route('profits.filterData') }}">
+     <label>من :</label>
+     <input type="date" name="start_date" class="form-control">
+     <label> الى:</label>
+     <input type="date" name="end_date" class="form-control">
+     <button type="submit" class="btn btn-primary">فلتر</button>
+
+     <a href="{{route('profits.index')}}" class="btn btn-danger m-3">مسح الفلاتر</a>
+ </form>

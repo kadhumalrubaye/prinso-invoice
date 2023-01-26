@@ -88,10 +88,11 @@
                     <thead>
                         <tr>
                             <th>رقم الفاتورة</th>
-                            <th>حالة الدفع</th>
-                            <th>سعر التوصيل</th>
-                            <th>السعر الكلي</th>
                             <th>تاريخ الانشاء</th>
+                            <th>الزبون </th>
+                            <th>السعر الكلي</th>
+                            <th>السعر الكلفة</th>
+                            <th>الربح الصافي </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,12 +101,16 @@
 
                         <tr>
                             <td>{{$invoice->id }}</td>
-                            <td>{{$invoice->payment_status}}</td>
-                            <td>{{$invoice->delivery_price}}</td>
-                            <td>{{$invoice->total_price}}</td>
                             <td>
-                                {{$invoice->created_at}}
+                                {{$invoice->created_at->format('Y-m-d');}}
                             </td>
+                            <td>{{$invoice->customer->name }}</td>
+
+
+                            <td>{{$invoice->total_price}}</td>
+                            <td>{{$invoice->total_price}}</td>
+                            <td>{{$invoice->total_price}}</td>
+
                             <!-- <td>$162,700</td>
                             <td>Cell 7</td>
                             <td>Cell 8</td> -->

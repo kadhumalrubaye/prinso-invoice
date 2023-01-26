@@ -5,7 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliveryAgencyController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ItemController;
-
+use App\Http\Controllers\ProfitController;
 use App\Http\Controllers\ReportAController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +39,8 @@ Route::resource('customers', CustomerController::class);
 //customers.show
 Route::get('/items', [ItemController::class]);
 Route::resource('items', ItemController::class);
-Route::get('/invoices/profits', [InvoiceController::class, 'getProfits'])->name('invoices.profits');
+Route::get('/profits/filterdata', [ProfitController::class, 'filterData'])->name('profits.filterData');
+Route::resource('profits', ProfitController::class);
 Route::resource('invoices', InvoiceController::class);
 Route::resource('deliveries', DeliveryAgencyController::class);
 Route::resource('reporta', ReportAController::class);

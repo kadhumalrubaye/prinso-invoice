@@ -24,7 +24,7 @@
                   <th scope="row">
                       <div class="form-group">
 
-                          <input type="number" name="items[0][original_price]" class="form-control " id="itemOrginalPrice_0" aria-describedby="emailHelp" placeholder="السعر الاصلي">
+                          <input type="number" name="items[0][original_price]" class="form-control itemCostPrice" id="itemOrginalPrice_0" aria-describedby="emailHelp" placeholder="السعر الكلفة">
                           <small id="emailHelp" class="form-text text-muted"></small>
                       </div>
                   </th>

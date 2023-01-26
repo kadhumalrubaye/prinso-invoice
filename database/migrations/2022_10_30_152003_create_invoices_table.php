@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('note', length: 255);
             $table->double('discount'); // delivery + item_total  price
             $table->double('total_price'); // delivery + item_total  price
+            $table->double('cost_total_price'); // delivery + item_total  price
 
             // $table->double('price', 8, 3); 
         });

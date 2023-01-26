@@ -25,16 +25,22 @@
                 <table class="table my-0" id="dataTable">
                     <thead>
                         <tr>
-                            <th>رقم الفاتورة</th>
-                            <th>الزبون</th>
-                            <th>المنتج</th>
-                            <th>العنوان</th>
-                            <th>جهة التوصيل</th>
-                            <th>حالة الدفع</th>
-                            <th>سعر التوصيل</th>
-                            <th>السعر الكلي</th>
+                            <th>
+                                <a href="{{ url()->current() . '?sortBy=id' }}">رقم الفاتورة</a>
+                            </th>
+                            <th> <a href="{{ url()->current() . '?sortBy=customer_id' }}">الزبون </a></th>
+                            <th> <a href="{{ url()->current() . '?sortBy=id' }}">المنتج </a></th>
+                            <th> <a href="{{ url()->current() . '?sortBy=location' }}">العنوان </a></th>
+                            <th> <a href="{{ url()->current() . '?sortBy=delivery_agency_id' }}">جهة التوصيل</a></th>
+                            <th> <a href="{{ url()->current() . '?sortBy=payment_status' }}">حالة الدفع</a></th>
+                            <th> <a href="{{ url()->current() . '?sortBy=delivery_price' }}">سعر التوصيل</a></th>
+                            <th> <a href="{{ url()->current() . '?sortBy=total_price' }}">السعر الكلي</a></th>
+
+
+
                             <th>الملاحظات</th>
-                            <th>تاريخ الانشاء</th>
+                            <th> <a href="{{ url()->current() . '?sortBy=created_at' }}">تاريخ الانشاء</a></th>
+
                             <th>العمليات</th>
                         </tr>
                     </thead>
@@ -73,12 +79,15 @@
                             }}
                             </td>
                             <td>
-                                {{$invoice->created_at}}
+                                {{$invoice->created_at->format('Y-m-d');}}
                             </td>
                             <td>
-
-
                                 <a class="btn btn-primary" href="{{route('invoices.edit', $invoice)}}"> تعديل</a>
+                                <form method="post" action="{{route('invoices.destroy',$invoice)}}">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger m-1 "> حذف</button>
+                                </form>
                             </td>
                             <!-- <td>$162,700</td>
                             <td>Cell 7</td>

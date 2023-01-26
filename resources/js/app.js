@@ -89,8 +89,8 @@ jQuery(function () {
 
                         ),
                         $('<td>').append(
-                            $('<input>').addClass('form-control').attr({
-                                placeholder: "السعر الاصلي ",
+                            $('<input>').addClass('form-control itemCostPrice').attr({
+                                placeholder: "السعر الكلفة ",
                                 type: 'number',
                                 name: `items[${counter}][original_price]`,
                                 id: 'itemOrginalPrice_' + counter
@@ -137,37 +137,37 @@ jQuery(function () {
 });
 
 //datetimve picker
-$(function () {
-    var dateFormat = "mm/dd/yy",
-        from = $("#datetimepicker")
-            .datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                numberOfMonths: 3
-            })
-            .on("change", function () {
-                to.datepicker("option", "minDate", getDate(this));
-            }),
-        to = $("#to").datepicker({
-            defaultDate: "+1w",
-            changeMonth: true,
-            numberOfMonths: 3
-        })
-            .on("change", function () {
-                from.datepicker("option", "maxDate", getDate(this));
-            });
+// $(function () {
+//     var dateFormat = "mm/dd/yy",
+//         from = $("#datetimepicker")
+//             .datepicker({
+//                 defaultDate: "+1w",
+//                 changeMonth: true,
+//                 numberOfMonths: 3
+//             })
+//             .on("change", function () {
+//                 to.datepicker("option", "minDate", getDate(this));
+//             }),
+//         to = $("#to").datepicker({
+//             defaultDate: "+1w",
+//             changeMonth: true,
+//             numberOfMonths: 3
+//         })
+//             .on("change", function () {
+//                 from.datepicker("option", "maxDate", getDate(this));
+//             });
 
-    function getDate(element) {
-        var date;
-        try {
-            date = $.datepicker.parseDate(dateFormat, element.value);
-        } catch (error) {
-            date = null;
-        }
+//     function getDate(element) {
+//         var date;
+//         try {
+//             date = $.datepicker.parseDate(dateFormat, element.value);
+//         } catch (error) {
+//             date = null;
+//         }
 
-        return date;
-    }
-});
+//         return date;
+//     }
+// });
 
 
 
@@ -179,16 +179,39 @@ $(document).on("click", '.remove-item', function () {
     $("#removeItemBtn").closest("#item-form").remove();
 
 });
+//---
+$(document).on("click", '.costTotalPrice', function () {
+
+
+
+
+    let itemPrices = $('input.itemCostPrice');
+
+    var totalPrices = 0;
+    itemPrices.each(function () {
+        let price = $(this).val();
+        if (!price) {
+
+            price = 0;
+
+        }
+        price = parseInt(price);
+        totalPrices = totalPrices + price;
+        console.log(totalPrices);
+    });
+
+    $("#costTotalPrice").val(totalPrices);
+    console.log(totalPrices);
+
+
+});
 
 $(document).jquery(
     $("#invoiceTotalPrice").on({
         focus: function () {
-
             console.log('ok');
             let itemQuantites = $('#table-container :input#itemQuantity_0');
-
             let itemPrices = $('input.itemPrice');
-
             var totalPrices = 0;
             itemPrices.each(function () {
                 let price = $(this).val();
@@ -204,15 +227,10 @@ $(document).jquery(
 
             $("#invoiceTotalPrice").val(totalPrices);
             console.log(totalPrices);
-
             let itemOrginalPrices = $('#table-container :input#itemOrginalPrice');
-
 
         },
     })
 
 );
-
-
-
 
