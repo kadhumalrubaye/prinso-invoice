@@ -138,18 +138,21 @@ class InvoiceController extends Controller
     public function show(Invoice $invoice)
     {
     }
-    public function generateInvoice($id)
+    public function generateInvoice(Request $request)
     {
+        $getid = $request->route('id');
+
+        $id = $request->id;
+
         $invoice = Invoice::find($id);
-        $items = InvoiceItem::where('invoice_id', $id)->get();
-        $pdf = PDF::loadView('invoice', compact('invoice', 'items'));
+
+        $pdf = PDF::loadView('print-invoice', compact('invoice', 'invoice'));
         return $pdf->download('invoice.pdf');
     }
 
 
     public function edit(Invoice $invoice)
     {
-
         $invoice_delivery = DeliveryAgency::find($invoice->delivery_agency_id);
         $deliveries = DeliveryAgency::all();
         $items = Item::where("invoice_id", $invoice->id)->get();
@@ -159,7 +162,6 @@ class InvoiceController extends Controller
             'invoice_delivery' => $invoice_delivery,
             'deliveries' => $deliveries,
             'items' => $items,
-
             'customer' => $customer
         ]);
     }
@@ -242,6 +244,11 @@ class InvoiceController extends Controller
             $invoices = Invoice::whereDate('created_at', '>=', $startDate)
                 ->whereDate('created_at', '<=', $endDate)
                 ->get();
+            $totalPrice = $invoices->sum('total_price');
+            $payed = $invoices->where('payment_status', 'yes')->count();
+            $notPayed = $invoices->where('payment_status', 'yes')->count();
+            $total = $invoices->count();
+
             $profites = $invoices->sum('total_price');
             return view('components.invoice.profits', [
                 'profits' => $profites,

@@ -41,6 +41,7 @@ Route::get('/items', [ItemController::class]);
 Route::resource('items', ItemController::class);
 Route::get('/profits/filterdata', [ProfitController::class, 'filterData'])->name('profits.filterData');
 Route::resource('profits', ProfitController::class);
+Route::get('/invoices/print/{id}', [InvoiceController::class, 'generateInvoice'])->name('invoices.print');
 Route::resource('invoices', InvoiceController::class);
 Route::resource('deliveries', DeliveryAgencyController::class);
 Route::resource('reporta', ReportAController::class);

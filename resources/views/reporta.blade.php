@@ -72,7 +72,12 @@
                             <td> {{$report->payment_status}}</td>
                             <td>
 
-                                <div class="btn btn-primary">طباعة</div>
+                                <form method="GET" action="{{route('invoices.print',['id'=>$report->invoice_id])}}">
+                                    @method('get')
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary m-1 "> طباعة</button>
+                                </form>
+
                             </td>
 
 
