@@ -1,3 +1,15 @@
 [] filter
 [] get profites of specific date range
-
+//to install the system 
+-clone it 
+-install xammp and start all it's services
+-install composer 
+-inside the project [composer install;php artisan migrate;npm install ;npm run dev;php artisan serve]
+[] when install the system from github : can't insert item from invoice page
+cuz the invoice table dosen't created yet
+so : ethier you make invoice_id nullable or don't insert item from invoice page , your should insert theme from items page
+or ---> control the sequence of database execution so the invoice created first then the item created and binded to the invoice 
+or edit invoice date file and put it before item 
+or make the type of 
+$table->unsignedInteger('invoice_id')->nullable()->default(0);
+$table->unsignedBigInteger('invoice_id')->nullable()->default(0);  //works 😄
