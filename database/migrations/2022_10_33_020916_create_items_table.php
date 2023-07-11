@@ -15,14 +15,16 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('invoice_id')->nullable()->default(-1);
-            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->timestamps();
             $table->string('item_name',);
             $table->integer('quantity',);
             $table->double('price',);
-
             $table->double('original_price',);
+            $table->unsignedBigInteger('invoice_id')->nullable(); // Make it nullable
+            $table->foreign('invoice_id')
+                ->references('id')
+                ->on('invoices')
+                ->onDelete('cascade');
         });
     }
 

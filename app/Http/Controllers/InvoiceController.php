@@ -101,17 +101,27 @@ class InvoiceController extends Controller
         $invoice->customer_id = $customer->id;
 
 
+
+
+
+        foreach ($items as $itemData) {
+            $item = new Item([
+                'item_name' => $itemData['item_name'],
+                'quantity' => $itemData['quantity'],
+                'price' => $itemData['price'],
+                // 'total_price' => $itemData['total_price'],
+                'original_price' => $itemData['original_price'],
+                // 'total_original_price' => $itemData['total_original_price'],
+            ]);
+            $invoice->items()->save($item);
+        }
         $invoice->save();
-
-
-
-
-        $invoice_model = Invoice::find($invoice->id);
-        $invoice_model->items()->createMany($items);
-        $invoice_model->customer()->associate($customer);
-        // $invoice_model->delivery_agency_id = $de->id;
-        // $invoice_model->delivery_agency()->associate($de);
-        $invoice_model->save();
+        // $invoice_model = Invoice::find($invoice->id);
+        // $invoice_model->items()->createMany($items);
+        // $invoice_model->customer()->associate($customer);
+        // // $invoice_model->delivery_agency_id = $de->id;
+        // // $invoice_model->delivery_agency()->associate($de);
+        // $invoice_model->save();
 
 
 

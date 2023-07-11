@@ -13,10 +13,10 @@ class Item extends Model
         'item_name',
         'quantity',
         'price',
-        'total_price',
+        // 'total_price',
+        // 'total_original_price',
         'original_price',
-        'total_original_price',
-        'invoice_id'
+        // 'invoice_id'
     ];
 
     public function invoice()

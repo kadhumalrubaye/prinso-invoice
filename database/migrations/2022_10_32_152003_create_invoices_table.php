@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('location');
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+
             $table->unsignedBigInteger('delivery_agency_id');
             $table->foreign('delivery_agency_id')->references('id')->on('delivery_agencies')->onDelete('cascade');
             $table->enum('payment_status', ['yes', 'no'])->default('no');
