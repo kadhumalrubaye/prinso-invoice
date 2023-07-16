@@ -31,6 +31,7 @@ RUN composer install --no-interaction --no-scripts --no-dev --prefer-dist
 # Set the correct file permissions
 RUN chown -R www-data:www-data /var/www/html/storage
 # Run the Vite development server...
+RUN php artisan migrate
 RUN npm run dev
  
 # Build and version the assets for production...

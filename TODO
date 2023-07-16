@@ -13,3 +13,4 @@ or edit invoice date file and put it before item
 or make the type of 
 $table->unsignedInteger('invoice_id')->nullable()->default(0);
 $table->unsignedBigInteger('invoice_id')->nullable()->default(0);  //works 😄
+alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
