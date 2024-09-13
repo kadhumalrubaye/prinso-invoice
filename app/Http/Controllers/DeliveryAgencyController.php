@@ -91,6 +91,6 @@ class DeliveryAgencyController extends Controller
      */
     public function destroy(DeliveryAgency $deliveryAgency)
     {
-        //
+        deliveryAgency->delete();
     }
 }

@@ -18,7 +18,7 @@ class ReportAFactory extends Factory
     public function definition()
     {
         return [
-            'invoice_id' => Invoice::all()->random()->id,
+            'invoice_id' => Invoice::factory()->create()->id,
         ];
     }
 }

@@ -18,7 +18,7 @@ class CustomerFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'phone' => fake()->randomDigit(),
+            'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
         ];
     }

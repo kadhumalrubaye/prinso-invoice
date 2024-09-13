@@ -19,7 +19,7 @@ return new class extends Migration
             // $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->timestamps();
             $table->string('name');
-            $table->bigInteger('phone');
+            $table->string('phone');
         });
     }
 

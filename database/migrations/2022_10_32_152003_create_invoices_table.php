@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+ 
 return new class extends Migration
 {
     /**
@@ -23,8 +23,8 @@ return new class extends Migration
             $table->unsignedBigInteger('delivery_agency_id');
             $table->foreign('delivery_agency_id')->references('id')->on('delivery_agencies')->onDelete('cascade');
             
-            $table->unsignedBigInteger('item_id');
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            // $table->unsignedBigInteger('item_id');
+            // $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
 
             $table->enum('payment_status', ['yes', 'no'])->default('no');
             $table->double('delivery_price');
