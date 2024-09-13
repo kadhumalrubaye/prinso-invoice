@@ -20,11 +20,11 @@ return new class extends Migration
             $table->integer('quantity',);
             $table->double('price',);
             $table->double('original_price',);
-            $table->unsignedBigInteger('invoice_id')->nullable(); // Make it nullable
-            $table->foreign('invoice_id')
-                ->references('id')
-                ->on('invoices')
-                ->onDelete('cascade');
+            // $table->unsignedBigInteger('invoice_id')->nullable(); // Make it nullable
+            // $table->foreign('invoice_id')
+            //     ->references('id')
+            //     ->on('invoices')
+            //     ->onDelete('cascade');
         });
     }
 

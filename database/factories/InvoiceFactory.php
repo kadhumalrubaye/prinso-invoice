@@ -32,6 +32,7 @@ class InvoiceFactory extends Factory
             'item_id' => Item::all()->random()->id,
             'delivery_price' => fake()->randomDigit(10),
             'total_price' => fake()->randomDigit(10),
+            'cost_total_price' => fake()->randomDigit(10),
             'discount' => fake()->randomDigit(10),
             'note' => fake()->text(),
         ];

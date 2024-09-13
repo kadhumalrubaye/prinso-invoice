@@ -18,8 +18,8 @@ class ItemFactory extends Factory
     {
         return [
             'price' => fake()->randomDigit(),
-            'name' => fake()->name(),
-            'item_num' => fake()->randomDigit(10),
+            'item_name' => fake()->name(),
+            // 'item_num' => fake()->randomDigit(10),
             'quantity' => fake()->randomDigit(10),
             'price' => fake()->randomDigit(10),
             // 'single_price' => fake()->randomDigit(),
